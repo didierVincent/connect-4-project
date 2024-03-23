@@ -1,5 +1,4 @@
-const colorChange = document.querySelector('body')
-colorChange.style.color = "purple"
+console.log("js is linked")
 
   /*----- constants -----*/
 
@@ -16,6 +15,15 @@ colorChange.style.color = "purple"
   /*----- functions -----*/
 
   /*----- model functions -----*/
+
+  board = [
+    [E, E, E, E, E],
+    [E, E, E, E, E],
+    [E, E, E, E, E],
+    [E, E, B, E, E],
+    [E, R, B, E, E],
+]
+
 
   /*----- controller functions -----*/
 
