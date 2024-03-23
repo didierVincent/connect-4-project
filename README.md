@@ -3,42 +3,49 @@ Connect 4!
 Player vs Player
 (or Player vs CPU?)
 
-## Description
-2 player game
-Turn based game
-Grid based game (Board)
+## Description & Game Rules
+- 2 player game
+- Turn based game
+- Grid based game (Board)
 
-This game called "Connect 4" is a turn-based 2 player game.
-This game is played on a 7x6 grid with 7 columns and 6 rows.
+- This game called "Connect 4" is a turn-based 2 player game.
+- This game is played on a 7x6 grid with 7 columns and 6 rows.
 
-Each player takes turns to place a single piece on the grid each, which must be placed only at the lowest available row of each column.
-Each piece that has been placed occupies that space in the grid until the game is over.
+- Each player takes turns to place a single piece on the grid each, which must be placed only at the lowest available row of each column.
+- Each piece that has been placed occupies that space in the grid until the game is over.
 
-To win, a player must place 4 pieces next to eachother that align either vertically, horizontally or diagonally against an opponent.
+- To win, a player must place 4 pieces next to eachother that align either vertically, horizontally or diagonally against an opponent.
 If there are no available spaces left to place pieces, and if neither player has won, the game results in a draw.
 
-## Roadmap
+## Wireframe
+
+![alt text](docs/wireframe/wire-frame-overview.png)
+![alt text](docs/wireframe/wire-frame-1-main-menu.png)
+![alt text](docs/wireframe/wire-frame-2-how-to-play.png)
+![alt text](docs/wireframe/wire-frame-3-game-UI.png)
+![alt text](docs/wireframe/wire-frame-4-example-win.png)
 
 ## Roadmap
- - [ ] Basic Game
- - [ ] Improve UI
+ - [ ] Basic Game (excluding diagonal wins, main menu page & how to play page)
+ - [ ] Adding Diagonal Wins
+ - [ ] Adding Main Menu & How to play page
 
 
-## Stories
+## Stories (in order of priority)
 - As a user, I want a 7x6 board that can be played on.
-- As a user, I want optional instructions on how to play before playing.
 - As a user, I only want to make legal moves in order to play the game properly.
-- As a user, I want to know when it's my turn.
+- (Making sure every piece falls to the lowest available row of each column if there is space.)
+
+- As a user, I want to visually know when it's my turn.
 - As a user, I want the game to end when someone has won.
-- As a user, I want a victory message and crown when when I win! And a lose message as well.
+
+## Optional Stories (in order of priority)
 - As a user, I want to be able to restart after the game is over.
-
-
+- As a user, I want to be able to go back to the main menu if I want to quit or see instructions on how to play.
+- As a user, I want instructions on how to play before playing.
+- As a user, I want a victory message and crown when when I win! And a lose message as well.
 
 # To Do
-
-
-
 # Figure out! 
 - [ ] Come up with pseudocode for game
 - [ ] 
@@ -47,12 +54,17 @@ If there are no available spaces left to place pieces, and if neither player has
 - [ ] Create HTML + Board 
 - [ ] Setup basic CSS for board properties
 
+## Optional Setup
+- [ ] (Optional) Create 'Main Menu' Page
+- [ ] (Optional) Create 'How To Play' Page
+- [ ] (Optional) Access to Main Menu while Game is running
+
 # Inject Grid for Board
 - [ ] Create JS logic for Grid (42 Spaces for 7x6 Board)
 - [ ] Inject JS Grid into HTML for Board
 
 # Setting Legal Moves
-- [ ] Set Starting Available Moves 
+- [ ] Set Starting Available Moves
 - [ ] Update Available moves on board
 - [ ] Don't allow moves if column is full
 - [ ] Game over if no spaces left
@@ -65,21 +77,22 @@ If there are no available spaces left to place pieces, and if neither player has
 # Check for win
 - [ ] Check for win horizontally
 - [ ] Check for win vertically
-- [ ] Check for win diagonally (one way)
-- [ ] Check for win diagonally (other way)
+- [ ] (optional) Check for win diagonally (one way)
+- [ ] (optional) Check for win diagonally (other way)
 
 # Game End
 - [ ] Win Message - Set a victory message for player that won
+- [ ] Win Image - Set a victory message for player that won
 - [ ] (Optional) Create a Line through winning pieces or Highlight pieces with thick outline
 - [ ] Draw - Set a draw message for a tie 
-- [ ] Add button to Restart Game
-- [ ] Restart game button should reset board
+- [ ] (Optional) Add button to Restart Game
+- [ ] (Optional) 'Play Again' button should reset board and start game again
 
 ## Pseudocode
---- Injecting Grid System Code ---
---- Creating Coordinate System for board ---
+## --- Injecting Grid System Code ---
+## --- Creating Coordinate System for board ---
 
---- Place Piece ---
+## --- Place Piece ---
 Need to setup 7 columns each with a row value, initially set to row 6
 Create an Array of Columns with row values
 On click, player will set a piece in the lowest row available in the column
