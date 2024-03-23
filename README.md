@@ -46,41 +46,40 @@ If there are no available spaces left to place pieces, and if neither player has
 - As a user, I want a victory message and crown when when I win! And a lose message as well.
 
 # To Do
-# Figure out! 
+### Figure out! 
 - [ ] Come up with pseudocode for game
-- [ ] 
 
-# Basic Setup
+### Basic Setup
 - [ ] Create HTML + Board 
 - [ ] Setup basic CSS for board properties
 
-## Optional Setup
+### Optional Setup
 - [ ] (Optional) Create 'Main Menu' Page
 - [ ] (Optional) Create 'How To Play' Page
 - [ ] (Optional) Access to Main Menu while Game is running
 
-# Inject Grid for Board
+### Inject Grid for Board
 - [ ] Create JS logic for Grid (42 Spaces for 7x6 Board)
 - [ ] Inject JS Grid into HTML for Board
 
-# Setting Legal Moves
+### Setting Legal Moves
 - [ ] Set Starting Available Moves
 - [ ] Update Available moves on board
 - [ ] Don't allow moves if column is full
 - [ ] Game over if no spaces left
 
-# Place Piece
+### Place Piece
 - [ ] Create coordinate system to check which space was clicked in HTML
 - [ ] Place Piece only if legal
 - [ ] Swap to other player after placing piece
 
-# Check for win
+### Check for win
 - [ ] Check for win horizontally
 - [ ] Check for win vertically
 - [ ] (optional) Check for win diagonally (one way)
 - [ ] (optional) Check for win diagonally (other way)
 
-# Game End
+### Game End
 - [ ] Win Message - Set a victory message for player that won
 - [ ] Win Image - Set a victory message for player that won
 - [ ] (Optional) Create a Line through winning pieces or Highlight pieces with thick outline
