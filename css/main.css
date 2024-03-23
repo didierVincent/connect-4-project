@@ -1,5 +1,60 @@
-
-//testing if css is linked properly
 body {
-    color:red
+    margin: 0 auto;
+    font-family: Montserrat, Helvetica, sans-serif;
 }
+
+main {
+    font-size:250%;
+    display: flex;
+    justify-content: center;
+    margin: 15px
+}
+#board {
+background-color: rgb(135, 189, 189);
+height: 615px;
+width: 700px;
+
+/* to partition all the divs wheres spaces can be played */
+display: flex;
+flex-wrap: wrap;
+margin: 0 auto;
+border-radius: 1%;
+}
+
+.redPiece {
+background-image: linear-gradient(red);
+}
+
+.bluePiece {
+    background-image: linear-gradient(blue);
+}
+
+.space {
+    height: 90px;
+    width: 90px;
+    background-color: aliceblue;
+    margin: 5px;
+    border-radius: 70%;
+}
+
+#features {
+    margin: 5px;
+    display: flex;
+    justify-content: space-evenly;
+    
+}
+
+#ctr {
+    display:flex;
+    justify-content: center;
+    padding: 50px
+}
+
+#restartButton {
+background-color: #04aa8e;
+border: none;
+color: white;
+padding: 16px 32px;
+font-size: 20px;
+}
+
