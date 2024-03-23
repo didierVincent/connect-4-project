@@ -1,0 +1,27 @@
+
+## writing ideas / brainstorming here
+
+## Description
+2 player game
+Turn based game
+Grid based game
+
+This game called "Connect 4" is a turn-based 2 player game.
+This game is played on a 7x6 grid with 7 columns and 6 rows.
+
+Each player takes turns to place a single piece on the grid each, which must be placed only at the lowest available row of each column.
+Each piece that has been placed occupies that space in the grid until the game is over.
+
+To win, a player must place 4 pieces next to eachother that align either vertically, horizontally or diagonally against an opponent.
+If there are no available spaces left to place pieces, and if neither player has won, the game results in a draw.
+
+## Psudocode
+
+-- Creating the Grid ---
+Inject JS grid board into HTML (for loop or something for iterating)
+
+playableRowInColumn array [Column , Row]
+
+--- Updating Available Moves ---
+Each piece played needs to update what row is avaiable in each column
+Pieces shouldn't be allowed to be placed if the highest row is 
