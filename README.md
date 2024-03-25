@@ -75,18 +75,20 @@ Player vs Player
 - [x] Create Board Array with coordinates set to (column,row)
 - [ ] Make sure code is right, not just looks right
 
+### Place Piece
+
+- [x] On click, change empty space to red or blue then swap to other player
+- [ ] On click, only change color of the space in the lowest row of the column, if no space in column, return
+- [ ] Create coordinate system to check which space was clicked in HTML
+- [ ] Place Piece only if legal
+- [ ] Swap to other player after placing piece
+
 ### Setting Legal Moves
 
 - [ ] Set Starting Available Moves
 - [ ] Update Available moves on board
 - [ ] Don't allow moves if column is full
 - [ ] Game over if no spaces left
-
-### Place Piece
-
-- [ ] Create coordinate system to check which space was clicked in HTML
-- [ ] Place Piece only if legal
-- [ ] Swap to other player after placing piece
 
 ### Check for win
 

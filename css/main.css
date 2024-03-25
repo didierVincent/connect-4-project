@@ -10,7 +10,7 @@ main {
     margin: 15px
 }
 #board {
-background-color: rgb(135, 189, 189);
+background-color: #2b2d42;
 height: 615px;
 width: 700px;
 
@@ -20,21 +20,20 @@ flex-wrap: wrap;
 margin: 0 auto;
 border-radius: 1%;
 }
-
-.redPiece {
-background-image: linear-gradient(red);
-}
-
-.bluePiece {
-    background-image: linear-gradient(blue);
-}
-
 .space {
     height: 90px;
     width: 90px;
     background-color: aliceblue;
     margin: 5px;
     border-radius: 70%;
+}
+
+.red-space {
+background-color: #d62839;
+}
+
+.blue-space {
+background-color: #669bbc;
 }
 
 #features {

@@ -1,17 +1,16 @@
-console.log("js is linked")
 
-  /*----- constants -----*/
+/*----------------------------------- constants ---------------------------------------------*/
 
-/*----- default settings -----*/
+/*----------------------------------- default settings -----------------------------------*/
 
 //declare players with Red and Blue
-const playerOne = "Red"
-const playerTwo = "Blue"
+const playerRed = "Red"
+const playerBlue = "Blue"
 
 //set starting default player to player one
-const playerTurn = playerOne
+let playerTurn = playerRed
 
-  /*----- creating the grid using JS, and storing coordinate data -----*/
+/*------------------------- creating the grid using JS, and storing coordinate data -------------------------*/
 
 //need to generate <div> tags for the html inside the board div with ([column],[row]) coordinates
 const board = [];
@@ -37,13 +36,72 @@ for (let i = 0; i < 6; i++) {
 }
 
 //testing that the board has nested arrays inside (used chrome dev tools to check html divs are correct)
+console.log("below is a console log of board")
 console.log(board)
 
+/*----------------------------------- placing a piece -----------------------------------*/
+//need to change a div background color to red or blue
+//do this by changing the class to .redPiece or .bluePiece
+//alternate between players, so after class is set to red, make the next click set to blue and vice versa
 
-  /*----- checking for wins -----*/
+// let space = document.getElementsByClassName("space")
+
+let spaceDiv = document.querySelectorAll(".space") //
+
+console.log("below is a console log of spaceDiv")
+console.log(spaceDiv)
+
+spaceDiv.forEach(spaceDiv => {
+spaceDiv.addEventListener('click', function(evt) {
+  if (playerTurn === playerRed) {
+    console.log("red is placed here")
+    spaceDiv.classList.add("red-space") 
+    playerTurn = playerBlue;
+   } else {
+    console.log("blue is placed here")
+    spaceDiv.classList.add("blue-space")
+    playerTurn = playerRed
+   }
+  })
+})
+
+/*----------------------------------- coordinate system to place piece at lowest row available (or return if no space) -----------------------------------*/
 
 //future for???set starting default row position for each column???
-const columnRow = [5,5,5,5,5,5,5]
+//let columnRow = [5,5,5,5,5,5,5]
+
+//idea: extract the ID from each div (to use as coordinates) and create an array
+
+ spaceDiv.forEach(spaceDiv => {
+  spaceDiv.addEventListener('click', function(evt) {
+    let coord = spaceDiv.id.split(',') //convert div id into array with ["column", "row"]
+    console.log(coord)
+    })
+  })
+
+
+
+//eg div id="0-0" will represent (column 0, row 0), like [c,r], and by default, r=5
+//so when a column is clicked, the div at the columnRow r value is checked and placed, and then updated
+
+// let c = coord[0]
+// let r = coord[1]
+
+//  const playableRow = columnRow[c]
+
+//  console.log(coord)
+
+//  if (playableRow < 1) { // to avoid placing if there if the highest row is full
+//   return; //early return if row = 0
+//  } else {
+//   columnRow.arraymethod to change columnRow[c] to (c -= 1)
+//   place piece at new position [c]
+
+
+//  }
+
+/*----------------------------------- checking for wins -----------------------------------*/
+
 
   /*----- state variables -----*/
 
