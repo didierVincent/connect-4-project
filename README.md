@@ -2,7 +2,6 @@
 
 Connect 4!
 Player vs Player
-(or Player vs CPU?)
 
 ## Description & Game Rules
 
@@ -10,7 +9,7 @@ Player vs Player
 - Turn based game
 - Grid based game (Board)
 
-- This game called "Connect 4" is a turn-based 2 player game.
+- This game called "Connect 4". It's a turn-based 2 player game.
 - This game is played on a 7x6 grid with 7 columns and 6 rows.
 
 - Each player takes turns to place a single piece on the grid each, which must be placed only at the lowest available row of each column.
@@ -38,9 +37,8 @@ Player vs Player
 - As a user, I want a 7x6 board that can be played on.
 - As a user, I only want to make legal moves in order to play the game properly.
 - (Making sure every piece falls to the lowest available row of each column if there is space.)
-
-- As a user, I want to visually know when it's my turn.
 - As a user, I want the game to end when someone has won.
+- As a user, I want to visually know when it's my turn.
 
 ## Optional Stories (in order of priority)
 
@@ -53,11 +51,16 @@ Player vs Player
 
 ### Figure out!
 
-- [ ] JS - Come up with pseudocode for game
+- [ ] Rewrite code and separate Model Functions with View Functions
+- [ ] Create Objects to store data for spaces (instead of arrays)
+- [ ] (?) Use JS Classes to create a dictionary for each space?
 
-### Basic Setup
+- [ ] Model Functions - Come up with pseudocode
+
+### Basic Setup - View
 
 - [x] Create HTML + Board
+- [x] Inject Divs with classes/id's using JS
 - [x] Basic Flexbox layout for features under Board
 - [ ] Features - Finalise display for Features under Board (Game Messages/Player Turn/Win or Loss Image)
 - [x] Setup basic CSS for board properties
@@ -68,11 +71,11 @@ Player vs Player
 - [ ] (Optional) Create 'How To Play' Page
 - [ ] (Optional) Access to Main Menu while Game is running
 
-### Inject Grid for Board
+### Inject Grid for Board - Model
 
-- [x] Come up with JS logic for injecting Grid
 - [x] Inject JS Grid into HTML for Board
 - [x] Create Board Array with coordinates set to (column,row)
+- [ ] Create Object database for spaces (x,y properties + set player property)
 - [ ] Make sure code is right, not just looks right
 
 ### Place Piece
@@ -106,7 +109,7 @@ Player vs Player
 - [ ] (Optional) 'Play Again' button should reset board and start game again
 - [ ] (Optional) Create a Line through winning pieces or Highlight pieces with thick outline
 
-## Pseudocode
+## Pseudocode - (need to update)
 
 ## --- Injecting Grid System Code ---
 

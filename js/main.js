@@ -1,14 +1,13 @@
-
 /*----------------------------------- constants ---------------------------------------------*/
 
 /*----------------------------------- default settings -----------------------------------*/
 
 //declare players with Red and Blue
-const playerRed = "Red"
-const playerBlue = "Blue"
+const playerRed = "Red";
+const playerBlue = "Blue";
 
 //set starting default player to player one
-let playerTurn = playerRed
+let playerTurn = playerRed;
 
 /*------------------------- creating the grid using JS, and storing coordinate data -------------------------*/
 
@@ -16,28 +15,34 @@ let playerTurn = playerRed
 const board = [];
 
 //need to create column arrays to nest inside board div in html, & to add to a board array to reference later for checking wins using coordinates
+const rows = 6;
+const columns = 7;
 
-for (let i = 0; i < 6; i++) {
-  let column = [];
-  for (let x = 0; x < 7; x++) {
-    //FOR JS ---> creating and adding (column,row) co-ordinate notation for each iteration
-    column.push(x.toString() + "," + i.toString());
+function makeBoard() {
+  for (let i = 0; i < rows; i++) {
+    let row = [];
+    for (let x = 0; x < columns; x++) {
+      //FOR JS ---> creating and adding (column,row) co-ordinate notation for each iteration
+      row.push(x.toString() + "," + i.toString());
 
-    //FOR HTML --> create <div> + id="(column,row)"" + class="space" --> append into board div
-    let space = document.createElement("div")
-    space.id = x.toString() + "," + i.toString();
-    space.classList.add("space")
+      //FOR HTML --> create <div> + id="(column,row)"" + class="space" --> append into board div
+      let space = document.createElement("div");
+      space.id = x.toString() + "," + i.toString();
+      space.classList.add("space");
 
-    //Add to board div
-    document.getElementById("board").appendChild(space);
+      //Add to board div
+      document.getElementById("board").appendChild(space);
+    }
+    //For JS --> after each full column array is created, we need to add that array to the board array
+    board.push(row);
   }
-  //For JS --> after each full column array is created, we need to add that array to the board array
-  board.push(column)
 }
 
+makeBoard();
+
 //testing that the board has nested arrays inside (used chrome dev tools to check html divs are correct)
-console.log("below is a console log of board")
-console.log(board)
+console.log("below is a console log of board");
+console.log(board);
 
 /*----------------------------------- placing a piece -----------------------------------*/
 //need to change a div background color to red or blue
@@ -46,46 +51,49 @@ console.log(board)
 
 // let space = document.getElementsByClassName("space")
 
-let spaceDiv = document.querySelectorAll(".space") //
+let spaceDiv = document.querySelectorAll(".space"); //
 
-console.log("below is a console log of spaceDiv")
-console.log(spaceDiv)
+console.log("below is a console log of spaceDiv");
+console.log(spaceDiv);
 
-spaceDiv.forEach(spaceDiv => {
-spaceDiv.addEventListener('click', function(evt) {
-  if (playerTurn === playerRed) {
-    console.log("red is placed here")
-    spaceDiv.classList.add("red-space") 
-    playerTurn = playerBlue;
-   } else {
-    console.log("blue is placed here")
-    spaceDiv.classList.add("blue-space")
-    playerTurn = playerRed
-   }
-  })
-})
+spaceDiv.forEach((spaceDiv) => {
+  spaceDiv.addEventListener("click", function (evt) {
+    if (playerTurn === playerRed) {
+      //check columnRow[coords[c]] to find row
+      //
+      //change
+      console.log("red is placed here");
+      spaceDiv.classList.add("red-space");
+      playerTurn = playerBlue;
+    } else {
+      console.log("blue is placed here");
+      spaceDiv.classList.add("blue-space");
+      playerTurn = playerRed;
+    }
+  });
+});
 
 /*----------------------------------- coordinate system to place piece at lowest row available (or return if no space) -----------------------------------*/
 
 //future for???set starting default row position for each column???
-//let columnRow = [5,5,5,5,5,5,5]
+//so when a column is clicked, the div at the columnRow r value is checked and placed, and then updated
+let columnRow = [5, 5, 5, 5, 5, 5, 5];
+// columnRow[c] = row
 
 //idea: extract the ID from each div (to use as coordinates) and create an array
 
- spaceDiv.forEach(spaceDiv => {
-  spaceDiv.addEventListener('click', function(evt) {
-    let coord = spaceDiv.id.split(',') //convert div id into array with ["column", "row"]
-    console.log(coord)
-    })
-  })
+spaceDiv.forEach((spaceDiv) => {
+  spaceDiv.addEventListener("click", function (evt) {
+    let coord = spaceDiv.id.split(","); //convert div id (0,0) string --> array = ["column", "row"]
+    console.log(coord);
+    let c = coord[0];
+    let r = coord[1];
+    console.log("below is a console log of coord");
+  });
+});
 
-
-
-//eg div id="0-0" will represent (column 0, row 0), like [c,r], and by default, r=5
-//so when a column is clicked, the div at the columnRow r value is checked and placed, and then updated
-
-// let c = coord[0]
-// let r = coord[1]
+console.log("below is a console log of board with index 0");
+console.log(board[0]);
 
 //  const playableRow = columnRow[c]
 
@@ -97,29 +105,19 @@ spaceDiv.addEventListener('click', function(evt) {
 //   columnRow.arraymethod to change columnRow[c] to (c -= 1)
 //   place piece at new position [c]
 
-
 //  }
 
 /*----------------------------------- checking for wins -----------------------------------*/
 
+/*----- state variables -----*/
 
-  /*----- state variables -----*/
+/*----- cached elements  -----*/
 
+/*----- event listeners -----*/
 
-  /*----- cached elements  -----*/
+/*----- functions -----*/
 
-
-  /*----- event listeners -----*/
-
-
-  /*----- functions -----*/
-
-
-  /*----- model functions -----*/
-
-
-
-
+/*----- model functions -----*/
 
 /*example board layout from Gab, E = empty, R = red piece, B = blue piece  
 
@@ -132,6 +130,6 @@ board = [
 ]
 */
 
-  /*----- controller functions -----*/
+/*----- controller functions -----*/
 
-  /*----- view functions -----*/
+/*----- view functions -----*/
