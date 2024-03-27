@@ -51,8 +51,8 @@ Player vs Player
 
 ### Figure out!
 
-- [ ] Rewrite code and separate Model Functions with View Functions
-- [ ] Create Objects to store data for spaces (instead of arrays)
+- [x] Rewrite code and separate Model Functions with View Functions
+- [x] Create Objects to store data for spaces (instead of arrays)
 - [ ] (?) Use JS Classes to create a dictionary for each space?
 
 - [ ] Model Functions - Come up with pseudocode
@@ -75,23 +75,21 @@ Player vs Player
 
 - [x] Inject JS Grid into HTML for Board
 - [x] Create Board Array with coordinates set to (column,row)
-- [ ] Create Object database for spaces (x,y properties + set player property)
-- [ ] Make sure code is right, not just looks right
+- [x] Create Object database for spaces (column + row properties)
 
-### Place Piece
+### View - Place Piece
 
 - [x] On click, change empty space to red or blue then swap to other player
-- [ ] On click, only change color of the space in the lowest row of the column, if no space in column, return
-- [ ] Create coordinate system to check which space was clicked in HTML
-- [ ] Place Piece only if legal
-- [ ] Swap to other player after placing piece
+- [x] On click, only change color of the space in the lowest row of the column, if no space in column, return
+- [x] Derive coordinates (from set id values) from clicks
+- [x] Place Piece only if legal
+- [x] Swap to other player after placing piece
 
-### Setting Legal Moves
+### Model - Setting Legal Moves
 
-- [ ] Set Starting Available Moves
-- [ ] Update Available moves on board
-- [ ] Don't allow moves if column is full
-- [ ] Game over if no spaces left
+- [x] Set Starting Available Moves
+- [x] Update Available moves on board
+- [x] Don't allow moves if column is full
 
 ### Check for win
 
@@ -102,26 +100,21 @@ Player vs Player
 
 ### Game End
 
+- [ ] Game over if no spaces left - Game over message
 - [ ] Win Message - Set a victory message for player that won
 - [ ] Win/Loss Image - Display a win or loss image for both players
 - [ ] Draw - Set a draw message for a tie
 - [ ] (Optional) Add button to Restart Game
 - [ ] (Optional) 'Play Again' button should reset board and start game again
+- [ ] (Optional) Feature: Visual Indicator for when its player 1 or player 2's turn
 - [ ] (Optional) Create a Line through winning pieces or Highlight pieces with thick outline
 
-## Pseudocode - (need to update)
+### Things to refactor
 
-## --- Injecting Grid System Code ---
+- [ ] Scope: Make sure things are declared in the right scope
+- [ ] Try remove repetitive code
+- [ ] Try simplify code
 
-## --- Creating Coordinate System for board ---
+### Things to debug
 
-## --- Place Piece ---
-
-(below is outdated)
-
-Need to setup 7 columns each with a row value, initially set to row 6
-Create an Array of Columns with row values
-On click, player will set a piece in the lowest row available in the column
-Otherwise If no space is left in the column, click will do nothing
-After each piece is placed, game should check for a win and end game if so
-After a player
+- [ ] Error: Doesn't place piece if click is executed inbetween the circle divs

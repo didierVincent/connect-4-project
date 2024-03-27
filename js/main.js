@@ -24,14 +24,6 @@ function makeBoard() {
     for (let x = 0; x < columns; x++) {
       //FOR JS ---> creating and adding (column,row) co-ordinate notation for each iteration
       row.push(x.toString() + "," + i.toString());
-
-      //FOR HTML --> create <div> + id="(column,row)"" + class="space" --> append into board div
-      let space = document.createElement("div");
-      space.id = x.toString() + "," + i.toString();
-      space.classList.add("space");
-
-      //Add to board div
-      document.getElementById("board").appendChild(space);
     }
     //For JS --> after each full column array is created, we need to add that array to the board array
     board.push(row);
@@ -39,6 +31,21 @@ function makeBoard() {
 }
 
 makeBoard();
+
+function renderBoard() {
+  for (let i = 0; i < rows; i++) {
+    let row = [];
+    for (let x = 0; x < columns; x++) {
+      let space = document.createElement("div");
+      space.id = x.toString() + "." + i.toString();
+      space.classList.add("space");
+      //Add to board div
+      document.getElementById("board").appendChild(space);
+    }
+  }
+}
+
+renderBoard();
 
 //testing that the board has nested arrays inside (used chrome dev tools to check html divs are correct)
 console.log("below is a console log of board");
@@ -51,49 +58,193 @@ console.log(board);
 
 // let space = document.getElementsByClassName("space")
 
-let spaceDiv = document.querySelectorAll(".space"); //
+const colData = {
+  column0: {
+    c: 0,
+    r: 6,
+  },
 
-console.log("below is a console log of spaceDiv");
-console.log(spaceDiv);
+  column1: {
+    c: 1,
+    r: 6,
+  },
 
-spaceDiv.forEach((spaceDiv) => {
-  spaceDiv.addEventListener("click", function (evt) {
-    if (playerTurn === playerRed) {
-      //check columnRow[coords[c]] to find row
-      //
-      //change
-      console.log("red is placed here");
-      spaceDiv.classList.add("red-space");
-      playerTurn = playerBlue;
-    } else {
-      console.log("blue is placed here");
-      spaceDiv.classList.add("blue-space");
-      playerTurn = playerRed;
-    }
-  });
-});
+  column2: {
+    c: 2,
+    r: 6,
+  },
+
+  column3: {
+    c: 3,
+    r: 6,
+  },
+
+  column4: {
+    c: 4,
+    r: 6,
+  },
+
+  column5: {
+    c: 5,
+    r: 6,
+  },
+
+  column6: {
+    c: 6,
+    r: 6,
+  },
+};
 
 /*----------------------------------- coordinate system to place piece at lowest row available (or return if no space) -----------------------------------*/
 
 //future for???set starting default row position for each column???
 //so when a column is clicked, the div at the columnRow r value is checked and placed, and then updated
-let columnRow = [5, 5, 5, 5, 5, 5, 5];
+// let columnRow = [5, 5, 5, 5, 5, 5, 5];
 // columnRow[c] = row
 
 //idea: extract the ID from each div (to use as coordinates) and create an array
+let spaceDiv = document.querySelectorAll(".space");
+console.log("below is a console log of spaceDiv");
+console.log(spaceDiv);
 
-spaceDiv.forEach((spaceDiv) => {
-  spaceDiv.addEventListener("click", function (evt) {
-    let coord = spaceDiv.id.split(","); //convert div id (0,0) string --> array = ["column", "row"]
-    console.log(coord);
-    let c = coord[0];
-    let r = coord[1];
-    console.log("below is a console log of coord");
-  });
-});
+function updatePlayableSpaces(event) {
+  const coords = event.target.id.split(".");
+  const bottomSpace = document.getElementById(
+    coords[0] + "." + colData["column" + coords[0]].r
+  );
+  // console.log(event.target.id);
+  if (colData["column" + coords[0]].r < 0) {
+    console.log("row property unchanged: " + colData["column" + coords[0]].r);
+    return;
+  } else {
+    colData["column" + coords[0]].r -= 1;
+  }
+}
 
-console.log("below is a console log of board with index 0");
-console.log(board[0]);
+document
+  .getElementById("board")
+  .addEventListener("click", updatePlayableSpaces);
+
+// function updatePlayableSpaces() {
+//   spaceDiv.forEach((spaceDiv) => {
+//     spaceDiv.addEventListener("click", function (evt) {
+//       //convert clicked div id (0,0) string --> array = ["column", "row"]
+//       let coord = spaceDiv.id.split(",");
+//       //testing
+//       // console.log("below is a console log of coord");
+//       // console.log(coord);
+//       //grab column value
+//       let c = coord[0];
+//       //testing if i can access the object using the code below
+//       // console.log("column was set at row " + colData["column" + c].r);
+//       //checking if string or checking existing object
+//       // console.log("typeof: " + typeof colData["column" + c].r);
+
+//       if (colData["column" + c].r <= 0) {
+//         console.log("row property unchanged: " + colData["column" + c].r);
+//         return;
+//       } else {
+//         colData["column" + c].r -= 1;
+//       }
+//       // console.log("row property updated to " + colData["column" + c].r);
+//     });
+//   });
+// }
+
+// updatePlayableSpaces();
+
+// console.log("below is a console log of board with index 0");
+// console.log(board[0]);
+
+// let spaceDiv = document.querySelectorAll(".space");
+
+// spaceDiv.forEach((spaceDiv) => {
+// let coord = spaceDiv.id.split(",");
+// let c = coord[0];
+// let r = coord[1];
+// });
+
+// console.log("below is a console log of coord");
+// console.log(coord);
+
+// function viewSetPiece() {
+//   spaceDiv.forEach((spaceDiv) => {
+//     spaceDiv.addEventListener("click", function (evt) {
+//       let coord = spaceDiv.id.split(",");
+//       let c = coord[0];
+//       let r = coord[1];
+
+//       const bottomRowDiv = spaceDiv;
+//       bottomRowDiv.id = colData["column" + c].c + "," + colData["column" + c].r;
+//       console.log("below is a console log of bottomRowDiv");
+//       console.log(bottomRowDiv);
+
+//       if (playerTurn === playerRed) {
+//         //add class to div with same c value, at r value (colData["column" + c].r)
+//         bottomRowDiv.classList.add("red-space");
+//         playerTurn = playerBlue;
+//       } else {
+//         //testing
+//         // console.log("blue is placed here");
+//         bottomRowDiv.classList.add("blue-space");
+//         playerTurn = playerRed;
+//       }
+//     });
+//   });
+// }
+
+// function viewSetPiece() {
+//   const bottomRowDiv = spaceDiv;
+//   bottomRowDiv.id = colData["column" + c].c + "," + colData["column" + c].r;
+
+//   spaceDiv.forEach((spaceDiv) => {
+//     let coord = spaceDiv.id.split(",");
+//     let c = coord[0];
+//     let r = coord[1];
+//     spaceDiv.addEventListener("click", function (evt) {
+//       if (playerTurn === playerRed) {
+//         spaceDiv.classList.add("red-space");
+//         playerTurn = playerBlue;
+//       } else {
+//         //testing
+//         // console.log("blue is placed here");
+//         spaceDiv.classList.add("blue-space");
+//         playerTurn = playerRed;
+//       }
+//     });
+//   });
+// }
+function setColour(event) {
+  const coords = event.target.id.split(".");
+  const bottomSpace = document.getElementById(
+    coords[0] + "." + colData["column" + coords[0]].r
+  );
+  // console.log(event.target.id);
+  if (colData["column" + coords[0]].r < 0) {
+    console.log("row property unchanged: " + colData["column" + coords[0]].r);
+    return;
+  } else if (playerTurn === playerRed) {
+    bottomSpace.style.backgroundColor = "#d62839"; // red
+    playerTurn = playerBlue;
+  } else if (playerTurn === playerBlue) {
+    bottomSpace.style.backgroundColor = "#669bbc"; // blue
+    playerTurn = playerRed;
+  }
+}
+
+document.getElementById("board").addEventListener("click", setColour);
+
+// viewSetPiece();
+
+/*----------------------------------- model: creating database for each space -----------------------------------*/
+//need to create a database for each space.
+//each space will need to be an object & have 3 properties each
+//properties: x : column value, y : row value, active: red/blue/null
+//will need to create 42 objects?, so should build them using a Class?
+//or create 7 objects for each column?
+
+//
+/*----------------------------------- random old code below -----------------------------------*/
 
 //  const playableRow = columnRow[c]
 
