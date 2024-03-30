@@ -9,12 +9,10 @@ const playerBlue = "Blue";
 //set starting default player to player one
 let playerTurn = playerRed;
 
-/*------------------------- creating the grid using JS, and storing coordinate data -------------------------*/
+/*-------- model: creating a nested board array to represent the game state using JS & assigning coordinates as id values --------*/
 
-//need to generate <div> tags for the html inside the board div with ([column],[row]) coordinates
 const board = [];
 
-//need to create column arrays to nest inside board div in html, & to add to a board array to reference later for checking wins using coordinates
 const rows = 6;
 const columns = 7;
 
@@ -22,24 +20,27 @@ function makeBoard() {
   for (let i = 0; i < rows; i++) {
     let row = [];
     for (let x = 0; x < columns; x++) {
-      //FOR JS ---> creating and adding (column,row) co-ordinate notation for each iteration
+      //for model ---> creating and adding (column,row) co-ordinate notation for each iteration
       row.push(x.toString() + "," + i.toString());
     }
-    //For JS --> after each full column array is created, we need to add that array to the board array
+    //for model --> after each full column array is created, we need to add that array to the board array
     board.push(row);
   }
 }
 
 makeBoard();
 
+/*------------------------- view: creating board for HTML using JS & assigning coordinates as id values -------------------------*/
+
 function renderBoard() {
   for (let i = 0; i < rows; i++) {
     let row = [];
     for (let x = 0; x < columns; x++) {
+      //for view ---> create divs with coordinate ids, and a unique class to style later in css
       let space = document.createElement("div");
       space.id = x.toString() + "." + i.toString();
       space.classList.add("space");
-      //Add to board div
+      //for view ---> adding divs to existing board div in html
       document.getElementById("board").appendChild(space);
     }
   }
@@ -47,16 +48,7 @@ function renderBoard() {
 
 renderBoard();
 
-//testing that the board has nested arrays inside (used chrome dev tools to check html divs are correct)
-console.log("below is a console log of board");
-console.log(board);
-
-/*----------------------------------- placing a piece -----------------------------------*/
-//need to change a div background color to red or blue
-//do this by changing the class to .redPiece or .bluePiece
-//alternate between players, so after class is set to red, make the next click set to blue and vice versa
-
-// let space = document.getElementsByClassName("space")
+/*----------------------------------- model: (board database) initialise column data with row property set to lowest row (6) -----------------------------------*/
 
 const colData = {
   column0: {
@@ -95,24 +87,13 @@ const colData = {
   },
 };
 
-/*----------------------------------- coordinate system to place piece at lowest row available (or return if no space) -----------------------------------*/
-
-//future for???set starting default row position for each column???
-//so when a column is clicked, the div at the columnRow r value is checked and placed, and then updated
-// let columnRow = [5, 5, 5, 5, 5, 5, 5];
-// columnRow[c] = row
-
-//idea: extract the ID from each div (to use as coordinates) and create an array
-let spaceDiv = document.querySelectorAll(".space");
-console.log("below is a console log of spaceDiv");
-console.log(spaceDiv);
+/*----------------------------------- model: update board database after placing a piece -----------------------------------*/
 
 function updatePlayableSpaces(event) {
   const coords = event.target.id.split(".");
   const bottomSpace = document.getElementById(
     coords[0] + "." + colData["column" + coords[0]].r
   );
-  // console.log(event.target.id);
   if (colData["column" + coords[0]].r < 0) {
     console.log("row property unchanged: " + colData["column" + coords[0]].r);
     return;
@@ -125,95 +106,8 @@ document
   .getElementById("board")
   .addEventListener("click", updatePlayableSpaces);
 
-// function updatePlayableSpaces() {
-//   spaceDiv.forEach((spaceDiv) => {
-//     spaceDiv.addEventListener("click", function (evt) {
-//       //convert clicked div id (0,0) string --> array = ["column", "row"]
-//       let coord = spaceDiv.id.split(",");
-//       //testing
-//       // console.log("below is a console log of coord");
-//       // console.log(coord);
-//       //grab column value
-//       let c = coord[0];
-//       //testing if i can access the object using the code below
-//       // console.log("column was set at row " + colData["column" + c].r);
-//       //checking if string or checking existing object
-//       // console.log("typeof: " + typeof colData["column" + c].r);
+/*----------------- view: check board database for column data then change background color to place piece (return if no space in column) -----------------*/
 
-//       if (colData["column" + c].r <= 0) {
-//         console.log("row property unchanged: " + colData["column" + c].r);
-//         return;
-//       } else {
-//         colData["column" + c].r -= 1;
-//       }
-//       // console.log("row property updated to " + colData["column" + c].r);
-//     });
-//   });
-// }
-
-// updatePlayableSpaces();
-
-// console.log("below is a console log of board with index 0");
-// console.log(board[0]);
-
-// let spaceDiv = document.querySelectorAll(".space");
-
-// spaceDiv.forEach((spaceDiv) => {
-// let coord = spaceDiv.id.split(",");
-// let c = coord[0];
-// let r = coord[1];
-// });
-
-// console.log("below is a console log of coord");
-// console.log(coord);
-
-// function viewSetPiece() {
-//   spaceDiv.forEach((spaceDiv) => {
-//     spaceDiv.addEventListener("click", function (evt) {
-//       let coord = spaceDiv.id.split(",");
-//       let c = coord[0];
-//       let r = coord[1];
-
-//       const bottomRowDiv = spaceDiv;
-//       bottomRowDiv.id = colData["column" + c].c + "," + colData["column" + c].r;
-//       console.log("below is a console log of bottomRowDiv");
-//       console.log(bottomRowDiv);
-
-//       if (playerTurn === playerRed) {
-//         //add class to div with same c value, at r value (colData["column" + c].r)
-//         bottomRowDiv.classList.add("red-space");
-//         playerTurn = playerBlue;
-//       } else {
-//         //testing
-//         // console.log("blue is placed here");
-//         bottomRowDiv.classList.add("blue-space");
-//         playerTurn = playerRed;
-//       }
-//     });
-//   });
-// }
-
-// function viewSetPiece() {
-//   const bottomRowDiv = spaceDiv;
-//   bottomRowDiv.id = colData["column" + c].c + "," + colData["column" + c].r;
-
-//   spaceDiv.forEach((spaceDiv) => {
-//     let coord = spaceDiv.id.split(",");
-//     let c = coord[0];
-//     let r = coord[1];
-//     spaceDiv.addEventListener("click", function (evt) {
-//       if (playerTurn === playerRed) {
-//         spaceDiv.classList.add("red-space");
-//         playerTurn = playerBlue;
-//       } else {
-//         //testing
-//         // console.log("blue is placed here");
-//         spaceDiv.classList.add("blue-space");
-//         playerTurn = playerRed;
-//       }
-//     });
-//   });
-// }
 function setColour(event) {
   const coords = event.target.id.split(".");
   const bottomSpace = document.getElementById(
@@ -234,30 +128,6 @@ function setColour(event) {
 
 document.getElementById("board").addEventListener("click", setColour);
 
-// viewSetPiece();
-
-/*----------------------------------- model: creating database for each space -----------------------------------*/
-//need to create a database for each space.
-//each space will need to be an object & have 3 properties each
-//properties: x : column value, y : row value, active: red/blue/null
-//will need to create 42 objects?, so should build them using a Class?
-//or create 7 objects for each column?
-
-//
-/*----------------------------------- random old code below -----------------------------------*/
-
-//  const playableRow = columnRow[c]
-
-//  console.log(coord)
-
-//  if (playableRow < 1) { // to avoid placing if there if the highest row is full
-//   return; //early return if row = 0
-//  } else {
-//   columnRow.arraymethod to change columnRow[c] to (c -= 1)
-//   place piece at new position [c]
-
-//  }
-
 /*----------------------------------- checking for wins -----------------------------------*/
 
 /*----- state variables -----*/
@@ -269,17 +139,6 @@ document.getElementById("board").addEventListener("click", setColour);
 /*----- functions -----*/
 
 /*----- model functions -----*/
-
-/*example board layout from Gab, E = empty, R = red piece, B = blue piece  
-
-board = [
-    [E, E, E, E, E],
-    [E, E, E, E, E],
-    [E, E, E, E, E],
-    [E, E, B, E, E],
-    [E, R, B, E, E],
-]
-*/
 
 /*----- controller functions -----*/
 
