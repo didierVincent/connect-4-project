@@ -54,59 +54,161 @@ const colData = {
   column0: {
     c: 0,
     r: 6,
+    p: null,
   },
 
   column1: {
     c: 1,
     r: 6,
+    p: null,
   },
 
   column2: {
     c: 2,
     r: 6,
+    p: null,
   },
 
   column3: {
     c: 3,
     r: 6,
+    p: null,
   },
 
   column4: {
     c: 4,
     r: 6,
+    p: null,
   },
 
   column5: {
     c: 5,
     r: 6,
+    p: null,
   },
 
   column6: {
     c: 6,
     r: 6,
+    p: null,
   },
 };
 
 /*----------------------------------- model: update board database after placing a piece -----------------------------------*/
 
+// function updatePlayableSpaces(event) {
+//   const coords = event.target.id.split(".");
+//   const bottomSpace = document.getElementById(
+//     coords[0] + "." + colData["column" + coords[0]].r
+//   );
+//   if (colData["column" + coords[0]].r < 0) {
+//     console.log("row property unchanged: " + colData["column" + coords[0]].r);
+//     return;
+//   } else {
+//     colData["column" + coords[0]].r -= 1;
+//     horizontalWin();
+//   }
+// }
+
+// function updatePlayableSpaces(event) {
+//   const coords = event.target.id.split(".");
+//   if (colData["column" + coords[0]].r < 0) {
+//     console.log("row property unchanged: " + colData["column" + coords[0]].r);
+//     return;
+//   } else if (playerTurn === playerRed) {
+//     colData["column" + coords[0]].p = "red";
+//     colData["column" + coords[0]].r -= 1;
+//     console.log(colData["column" + coords[0]].p);
+//     console.log(colData["column" + coords[0]].r);
+//     horizontalWin();
+//   } else if (playerTurn === playerBlue) {
+//     colData["column" + coords[0]].p = "blue";
+//     colData["column" + coords[0]].r -= 1;
+//     console.log(colData["column" + coords[0]].p);
+//     console.log(colData["column" + coords[0]].r);
+//     horizontalWin();
+//   }
+// }
+
+// function updatePlayableSpaces(event) {
+//   const coords = event.target.id.split(".");
+//   if (colData["column" + coords[0]].r < 0) {
+//     console.log("row property unchanged: " + colData["column" + coords[0]].r);
+//     return;
+//   } else if (playerTurn === playerRed) {
+//     colData["column" + coords[0]]["r" + colData["column" + coords[0]].r] =
+//       "red";
+//     colData["column" + coords[0]].r -= 1;
+//     console.log(
+//       colData["column" + coords[0]]["r" + colData["column" + coords[0]].r]
+//     );
+//     console.log(colData["column" + coords[0]].r);
+//     console.log(colData["column" + coords[0]]);
+//     horizontalWin();
+//   } else if (playerTurn === playerBlue) {
+//     colData["column" + coords[0]]["r" + colData["column" + coords[0]].r] =
+//       "blue";
+//     colData["column" + coords[0]].r -= 1;
+//     console.log(
+//       colData["column" + coords[0]]["r" + colData["column" + coords[0]].r]
+//     );
+//     console.log(colData["column" + coords[0]].r);
+//     console.log(colData["column" + coords[0]]);
+//     horizontalWin();
+//   }
+// }
+
 function updatePlayableSpaces(event) {
   const coords = event.target.id.split(".");
-  const bottomSpace = document.getElementById(
-    coords[0] + "." + colData["column" + coords[0]].r
-  );
-  if (colData["column" + coords[0]].r < 0) {
-    console.log("row property unchanged: " + colData["column" + coords[0]].r);
+  let cr = colData["column" + coords[0]];
+  let crV = colData["column" + coords[0]].r;
+
+  if (crV < 0) {
+    console.log("row property unchanged: " + crV);
     return;
-  } else {
+  } else if (playerTurn === playerRed) {
+    cr["r" + crV] = "red";
     colData["column" + coords[0]].r -= 1;
+    // console.log(cr["r" + crV]);
+    // console.log(crV);
+    // console.log("crV: " + typeof crV);
+    console.log(cr);
+    // console.log("cr: " + typeof cr);
+    checkHorizontalWin();
+  } else if (playerTurn === playerBlue) {
+    cr["r" + crV] = "blue";
+    colData["column" + coords[0]].r -= 1;
+    // console.log(cr["r" + crV]);
+    // console.log(crV);
+    // console.log("crV: " + typeof crV);
+    console.log(cr);
+    // console.log("cr: " + typeof cr);
+    checkHorizontalWin();
   }
 }
-
 document
   .getElementById("board")
   .addEventListener("click", updatePlayableSpaces);
 
 /*----------------- view: check board database for column data then change background color to place piece (return if no space in column) -----------------*/
+
+// function setColour(event) {
+//   const coords = event.target.id.split(".");
+//   const bottomSpace = document.getElementById(
+//     coords[0] + "." + colData["column" + coords[0]].r
+//   );
+//   // console.log(event.target.id);
+//   if (colData["column" + coords[0]].r < 0) {
+//     console.log("row property unchanged: " + colData["column" + coords[0]].r);
+//     return;
+//   } else if (playerTurn === playerRed) {
+//     bottomSpace.style.backgroundColor = "#d62839"; // red
+//     playerTurn = playerBlue;
+//   } else if (playerTurn === playerBlue) {
+//     bottomSpace.style.backgroundColor = "#669bbc"; // blue
+//     playerTurn = playerRed;
+//   }
+// }
 
 function setColour(event) {
   const coords = event.target.id.split(".");
@@ -129,6 +231,126 @@ function setColour(event) {
 document.getElementById("board").addEventListener("click", setColour);
 
 /*----------------------------------- checking for wins -----------------------------------*/
+//-------checking for horizontal wins-------//
+//drafting ideas below:
+
+// console.log(typeof colData);
+// console.log(colData["column0"]);
+// console.log(colData.column0.r);
+// console.log(colData["column" + (coords[0] + 1)]);
+
+//draft code #1.1
+// function checkHorizontalWin() {
+//   if (
+//     colData.column0.r < 6 &&
+//     colData.column0.r === colData.column1.r &&
+//     colData.column1.r === colData.column2.r &&
+//     colData.column2.r === colData.column3.r
+//   ) {
+//     console.log("WIN");
+//   }
+// }
+
+//document.getElementById("board").addEventListener("click", checkHorizontalWin)
+
+//draft code #1.2
+// function checkHorizontalWin(event) {
+//   const coords = event.target.id.split(".");
+//   // console.log(colData["column" + coords[0]].r);
+//   console.log("test" + (parseInt(coords[0]) + 1));
+//   console.log(colData["column" + (parseInt(coords[0]) + 1)].r);
+
+// console.log(colData["column" + (coords[0] * 1 + 1).toString]); .toString didnt work...
+//   if (
+//     colData["column" + coords[0]].r < 6 &&
+//     colData["column" + coords[0]].r ===
+//       colData["column" + (coords[0] * 1 + 1)].r &&
+//     colData["column" + (coords[0] * 1 + 1)].r ===
+//       colData["column" + (coords[0] * 1 + 2)].r &&
+//     colData["column" + (coords[0] * 1 + 2)].r ===
+//       colData["column" + (coords[0] * 1 + 3)].r
+//   ) {
+//     console.log("WIN");
+//   }
+// }
+
+//document.getElementById("board").addEventListener("click", checkHorizontalWin)
+
+//draft code #1.3
+//i thought the below code was perfect but it only checks if the next 3 columns match from the point that's clicked...
+//need to create a function that just scans the board regardless of the click location
+
+// function checkHorizontalWin(event) {
+//   const coords = event.target.id.split(".");
+//   let c = coords[0];
+//   console.log(colData["column" + (parseInt(c) + 3)].r);
+//   if (
+//     colData["column" + c].r < 6 &&
+//     colData["column" + c].r === colData["column" + (parseInt(c) + 1)].r &&
+//     colData["column" + c].r === colData["column" + (parseInt(c) + 2)].r &&
+//     colData["column" + c].r === colData["column" + (parseInt(c) + 3)].r
+//   ) {
+//     console.log("WIN");
+//   }
+// }
+
+// document.getElementById("board").addEventListener("click", checkHorizontalWin);
+
+//new idea: create a for loop to check the board state
+
+// console.log(board);
+// console.log(board[0]);
+// console.log(board[0][0]);
+// console.log(typeof board[0][0]);
+// console.log(board[0][0].split(","));
+
+//\\
+
+// console.log(colData);
+// console.log(Object.values(colData));
+// console.log(Object.values(colData)[0]);
+
+// console.log(Object.values(colData)[3].r); // this returns column3's row value as a number (6)
+// console.log(typeof Object.values(colData)[3].r);
+// console.log("logging keys below");
+// console.log(Object.values(colData));
+
+// columnRow.forEach((row) => console.log(row.r)); //this is logging all the r values in the object, can access row value with row.r
+
+const columnRow = Object.values(colData); //this is an array of objects
+console.log(columnRow[0].r); //row value of column 0
+let foo = columnRow[0]; //test
+console.log(columnRow[0 + 4].r); //test
+
+console.log(Object.values(colData));
+
+function checkHorizontalWin() {
+  for (let z = 0; z < columns - 3; z++) {
+    if (columnRow[z].p != null) {
+      if (
+        columnRow[z].r === columnRow[z + 1].r &&
+        columnRow[z].r === columnRow[z + 2].r &&
+        columnRow[z].r === columnRow[z + 3].r
+      ) {
+        for (let y = 0; y < rows; y++) {
+          if (
+            columnRow[y]["r" + y] === columnRow[y + 1]["r" + y] &&
+            columnRow[y]["r" + y] === columnRow[y + 2]["r" + y] &&
+            columnRow[y]["r" + y] === columnRow[y + 3]["r" + y]
+          ) {
+            console.log("HORIZONTAL WINNNN");
+          }
+        }
+      }
+    }
+  }
+}
+
+console.log(columnRow[0]["r" + 6]);
+
+//vertically
+//diagonally (1/2)
+//diagonally (2/2)
 
 /*----- state variables -----*/
 
