@@ -168,22 +168,26 @@ function updatePlayableSpaces(event) {
     return;
   } else if (playerTurn === playerRed) {
     cr["r" + crV] = "red";
+    cr.p = "on";
     colData["column" + coords[0]].r -= 1;
     // console.log(cr["r" + crV]);
     // console.log(crV);
     // console.log("crV: " + typeof crV);
     console.log(cr);
     // console.log("cr: " + typeof cr);
-    checkHorizontalWin();
+    // checkHorizontalWin();
+    checkVerticalWin();
   } else if (playerTurn === playerBlue) {
     cr["r" + crV] = "blue";
+    cr.p = "on";
     colData["column" + coords[0]].r -= 1;
     // console.log(cr["r" + crV]);
     // console.log(crV);
     // console.log("crV: " + typeof crV);
     console.log(cr);
     // console.log("cr: " + typeof cr);
-    checkHorizontalWin();
+    // checkHorizontalWin();
+    checkVerticalWin();
   }
 }
 document
@@ -215,9 +219,7 @@ function setColour(event) {
   const bottomSpace = document.getElementById(
     coords[0] + "." + colData["column" + coords[0]].r
   );
-  // console.log(event.target.id);
   if (colData["column" + coords[0]].r < 0) {
-    console.log("row property unchanged: " + colData["column" + coords[0]].r);
     return;
   } else if (playerTurn === playerRed) {
     bottomSpace.style.backgroundColor = "#d62839"; // red
@@ -229,6 +231,26 @@ function setColour(event) {
 }
 
 document.getElementById("board").addEventListener("click", setColour);
+
+function warnInvalidMove(event) {
+  const coords = event.target.id.split(".");
+  const errMsg = document.getElementById("ext2");
+  errMsg.style.transition = "500ms";
+  if (colData["column" + coords[0]].r < 0) {
+    errMsg.innerHTML = "Invalid Move!";
+    errMsg.style.fontSize = "32px";
+    errMsg.style.color = "#d62839";
+    errMsg.style.backgroundColor = "#0f1a20";
+    return;
+  } else {
+    errMsg.innerHTML = "Game Messages";
+    errMsg.style.fontSize = "16px";
+    errMsg.style.color = "black";
+    errMsg.style.backgroundColor = "white";
+  }
+}
+
+document.getElementById("board").addEventListener("click", warnInvalidMove);
 
 /*----------------------------------- checking for wins -----------------------------------*/
 //-------checking for horizontal wins-------//
@@ -318,35 +340,83 @@ document.getElementById("board").addEventListener("click", setColour);
 // columnRow.forEach((row) => console.log(row.r)); //this is logging all the r values in the object, can access row value with row.r
 
 const columnRow = Object.values(colData); //this is an array of objects
-console.log(columnRow[0].r); //row value of column 0
+// console.log(columnRow[0].r); //row value of column 0
 let foo = columnRow[0]; //test
-console.log(columnRow[0 + 4].r); //test
+// console.log(columnRow[0 + 4].r); //test
 
-console.log(Object.values(colData));
+// console.log(Object.values(colData));
+
+// function checkHorizontalWin() {
+//   for (let z = 0; z < columns - 3; z++) {
+//     if (columnRow[z].p === "on" && columnRow[z].r < 6) {
+//       if (
+//         columnRow[z].r === columnRow[z + 1].r &&
+//         columnRow[z].r === columnRow[z + 2].r &&
+//         columnRow[z].r === columnRow[z + 3].r
+//       ) {
+//         for (let y = 0; y < rows; y++) {
+//           console.log("testing rows");
+//           if (
+//             columnRow[y]["r" + y] === columnRow[y + 1]["r" + y] &&
+//             columnRow[y]["r" + y] === columnRow[y + 2]["r" + y] &&
+//             columnRow[y]["r" + y] === columnRow[y + 3]["r" + y]
+//           ) {
+//             console.log("HORIZONTAL WINNNN");
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
 
 function checkHorizontalWin() {
-  for (let z = 0; z < columns - 3; z++) {
-    if (columnRow[z].p != null) {
+  for (let y = 1; y < 7; y++)
+    for (let z = 0; z < columns - 3; z++) {
       if (
-        columnRow[z].r === columnRow[z + 1].r &&
-        columnRow[z].r === columnRow[z + 2].r &&
-        columnRow[z].r === columnRow[z + 3].r
+        columnRow[z].p === "on" &&
+        columnRow[z + 1].p === "on" &&
+        columnRow[z + 2].p === "on" &&
+        columnRow[z + 3].p === "on"
       ) {
-        for (let y = 0; y < rows; y++) {
-          if (
-            columnRow[y]["r" + y] === columnRow[y + 1]["r" + y] &&
-            columnRow[y]["r" + y] === columnRow[y + 2]["r" + y] &&
-            columnRow[y]["r" + y] === columnRow[y + 3]["r" + y]
-          ) {
-            console.log("HORIZONTAL WINNNN");
-          }
+        console.log("checking colors");
+        if (
+          columnRow[z]["r" + y] === columnRow[z + 1]["r" + y] &&
+          columnRow[z + 1]["r" + y] === columnRow[z + 2]["r" + y] &&
+          columnRow[z + 2]["r" + y] === columnRow[z + 3]["r" + y] &&
+          columnRow[z]["r" + y] != undefined &&
+          columnRow[z + 1]["r" + y] != undefined &&
+          columnRow[z + 2]["r" + y] != undefined &&
+          columnRow[z + 3]["r" + y] != undefined
+        ) {
+          console.log("HORIZONTAL WINNNN");
+          return;
         }
       }
     }
-  }
 }
 
-console.log(columnRow[0]["r" + 6]);
+function checkVerticalWin() {
+  for (let y = 1; y < 7; y++)
+    for (let z = 0; z < columns; z++) {
+      if (columnRow[z].p === "on") {
+        console.log("checking colors");
+        if (
+          columnRow[z]["r" + y] === columnRow[z]["r" + (y + 1)] &&
+          columnRow[z]["r" + y] === columnRow[z]["r" + (y + 2)] &&
+          columnRow[z]["r" + y] === columnRow[z]["r" + (y + 3)] &&
+          columnRow[z]["r" + y] != undefined &&
+          columnRow[z]["r" + (y + 1)] != undefined &&
+          columnRow[z]["r" + (y + 2)] != undefined &&
+          columnRow[z]["r" + (y + 3)] != undefined
+        ) {
+          console.log("VERTICAL WINNNN");
+          return;
+        }
+      }
+    }
+}
+
+// console.log(columnRow[0]["r" + 6]);
 
 //vertically
 //diagonally (1/2)
@@ -365,3 +435,44 @@ console.log(columnRow[0]["r" + 6]);
 /*----- controller functions -----*/
 
 /*----- view functions -----*/
+
+/*----- view - features -----*/
+
+const playerRedTurn = document.getElementById("ext1");
+const playerBlueTurn = document.getElementById("ext3");
+// console.log(playerRedTurn);
+
+function showPlayerTurn() {
+  if (playerTurn === playerRed) {
+    //reset blue
+    playerBlueTurn.style.backgroundColor = "#f3fbfb"; //grey
+    playerBlueTurn.style.fontSize = "100%";
+    playerBlueTurn.innerHTML = "waiting for other player...";
+    //change red
+    playerRedTurn.style.backgroundColor = "#d62839"; //red
+    playerRedTurn.style.fontSize = "120%";
+    playerRedTurn.innerHTML = "Player 1 move!";
+    playerRedTurn.style.borderStyle = "groove solid";
+  } else {
+    //reset red
+    playerRedTurn.style.backgroundColor = "#f3fbfb"; //grey
+    playerRedTurn.style.fontSize = "100%";
+    playerRedTurn.innerHTML = "waiting for other player...";
+    // change blue
+    playerBlueTurn.style.backgroundColor = "#669bbc"; //blue
+    playerBlueTurn.style.fontSize = "120%";
+    playerBlueTurn.innerHTML = "Player 2 move!";
+    playerBlueTurn.style.borderStyle = "groove solid";
+  }
+}
+document.getElementById("board").addEventListener("click", showPlayerTurn);
+
+function initTurnBoxes() {
+  playerRedTurn.innerHTML = "Player 1 move!";
+  playerRedTurn.style.transition = "500ms";
+  playerBlueTurn.style.transition = "500ms";
+  playerRedTurn.style.backgroundColor = "#d62839";
+  playerRedTurn.style.fontSize = "120%";
+}
+
+setTimeout(initTurnBoxes, 750);
