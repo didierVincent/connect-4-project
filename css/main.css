@@ -35,14 +35,6 @@ main {
   background-color: #353439;
 }
 
-.red-space {
-  background-color: #d62839;
-}
-
-.blue-space {
-  background-color: #669bbc;
-}
-
 #features1 {
   margin: 1px;
   display: flex;

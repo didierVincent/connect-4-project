@@ -53,25 +53,17 @@ Player vs Player
 
 - [x] Rewrite code and separate Model Functions with View Functions
 - [x] Create Objects to store data for spaces (instead of arrays)
-- [ ] (?) Use JS Classes to create a dictionary for each space?
-
-- [ ] Model Functions - Come up with pseudocode
+- [ ] ~~(?) Use JS Classes to create a dictionary for each space?~~ (wasn't necessary)
 
 ### Basic Setup - View
 
 - [x] Create HTML + Board
 - [x] Inject Divs with classes/id's using JS
 - [x] Basic Flexbox layout for features under Board
-- [ ] Features - Finalise display for Features under Board (Game Messages/Player Turn/Win or Loss Image)
+- [x] Features - Finalise display for Features under Board (Game Messages/Player Turn/~~Win or Loss Image~~)
 - [x] Setup basic CSS for board properties
 
-### Optional Setup
-
-- [ ] (Optional) Create 'Main Menu' Page
-- [ ] (Optional) Create 'How To Play' Page
-- [ ] (Optional) Access to Main Menu while Game is running
-
-### Inject Grid for Board - Model
+### Model - Inject Grid for Board
 
 - [x] Inject JS Grid into HTML for Board
 - [x] Create Board Array with coordinates set to (column,row)
@@ -79,11 +71,11 @@ Player vs Player
 
 ### View - Place Piece
 
-- [x] On click, change empty space to red or blue then swap to other player
-- [x] On click, only change color of the space in the lowest row of the column, if no space in column, return
 - [x] Derive coordinates (from set id values) from clicks
-- [x] Place Piece only if legal
+- [x] On click, change empty space to red or blue
 - [x] Swap to other player after placing piece
+- [x] On click, only change color of the space in the lowest row of the column, if no space in column, return
+- [x] Place Piece only if legal
 
 ### Model - Setting Legal Moves
 
@@ -93,28 +85,36 @@ Player vs Player
 
 ### Check for win
 
-- [ ] Check for win horizontally
-- [ ] Check for win vertically
-- [ ] (optional) Check for win diagonally (one way)
-- [ ] (optional) Check for win diagonally (other way)
+- [x] Check for win horizontally
+- [x] Check for win vertically
+- [x] (optional) Check for win diagonally (one way)
+- [x] (optional) Check for win diagonally (other way)
 
 ### Game End
 
-- [ ] Game over if no spaces left - Game over message
-- [ ] Win Message - Set a victory message for player that won
-- [ ] Win/Loss Image - Display a win or loss image for both players
-- [ ] Draw - Set a draw message for a tie
-- [ ] (Optional) Add button to Restart Game
-- [ ] (Optional) 'Play Again' button should reset board and start game again
+- [x] Game over if no spaces left - Game over message
+- [x] Win Message - Set a victory message for player that won
+- [ ] ~~Win/Loss Image - Display a win or loss image for both players~~
+- [x] Draw - Set a draw message for a tie
+- [x] (Optional) Add button to Restart Game
+- [x] (Optional) 'Play Again' button should reset board and start game again
 - [x] (Optional) Feature: Visual Indicator for when its player 1 or player 2's turn
-- [ ] (Optional) Create a Line through winning pieces or Highlight pieces with thick outline
+- [ ] ~~(Optional) Create a Line through winning pieces or Highlight pieces with thick outline~~
 
 ### Things to refactor
 
 - [ ] Scope: Make sure things are declared in the right scope
 - [ ] Try remove repetitive code
 - [ ] Try simplify code
+- [ ] Row value should be set to 5 instead of 6 (will need to adjust objects/functions for future clarity)
 
 ### Things to debug
 
 - [ ] Error: Doesn't place piece if click is executed inbetween the circle divs
+- [ ] checkDiagWinTwo() logs errors on certain spaces (still works correctly though)
+
+### Optional Setup
+
+- [ ] (Optional) Create 'Main Menu' Page
+- [ ] (Optional) Create 'How To Play' Page
+- [ ] (Optional) Access to Main Menu while Game is running
