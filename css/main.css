@@ -1,59 +1,144 @@
 body {
-    margin: 0 auto;
-    font-family: Montserrat, Helvetica, sans-serif;
+  margin: 0 auto;
+  font-family: Montserrat, Helvetica, sans-serif;
 }
 
 main {
-    font-size:250%;
-    display: flex;
-    justify-content: center;
-    margin: 15px
+  font-size: 250%;
+  display: flex;
+  justify-content: center;
+  margin: 15px;
 }
 #board {
-background-color: #2b2d42;
-height: 615px;
-width: 700px;
+  background-color: #0f1a20;
+  border: solid 1px #8c94a3;
+  height: 615px;
+  width: 700px;
 
-/* to partition all the divs wheres spaces can be played */
-display: flex;
-flex-wrap: wrap;
-margin: 0 auto;
-border-radius: 1%;
+  /* to partition all the divs wheres spaces can be played */
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  border-radius: 1%;
 }
+
 .space {
-    height: 90px;
-    width: 90px;
-    background-color: aliceblue;
-    margin: 5px;
-    border-radius: 70%;
+  height: 90px;
+  width: 90px;
+  background-color: aliceblue;
+  margin: 5px;
+  border-radius: 70%;
+  transition: background-color 200ms;
+}
+
+.space:hover {
+  background-color: #353439;
 }
 
 .red-space {
-background-color: #d62839;
+  background-color: #d62839;
 }
 
 .blue-space {
-background-color: #669bbc;
+  background-color: #669bbc;
 }
 
-#features {
-    margin: 5px;
-    display: flex;
-    justify-content: space-evenly;
-    
+#features1 {
+  margin: 1px;
+  display: flex;
+  justify-content: space-evenly;
 }
+
+#features2 {
+  margin: 1px;
+  display: flex;
+  justify-content: space-around;
+  border: 1px solid black;
+}
+
+#ext1 {
+  /* background-color: #d62839; */
+  border: solid 1px #cbd1dd;
+  font-size: 100%;
+  width: 350px;
+  height: 20px;
+  text-align: center;
+  align-content: center;
+  padding: 20px;
+  transition: background-color 500ms;
+  transition: border 1000ms;
+}
+
+#ext1:hover,
+#ext2:hover,
+#ext3:hover,
+#restartButton:hover {
+  border: 1px solid black;
+}
+
+#ext2 {
+  border: solid 1px #cbd1dd;
+  width: 350px;
+  height: 80px;
+  text-align: center;
+  align-content: center;
+  transition: border 1000ms;
+}
+
+#ext2:hover {
+  border: 1px solid black;
+}
+
+#ext3 {
+  background-color: #f3fbfb;
+  border: solid 1px #cbd1dd;
+  width: 350px;
+  height: 20px;
+  text-align: center;
+  align-content: center;
+  padding: 20px;
+  transition: background-color 500ms;
+  transition: border 1000ms;
+}
+
+#redCheckerImg {
+  background-color: #d62839;
+  height: 75px;
+  width: 75px;
+  border-radius: 50%;
+  border: solid 1px #cbd1dd;
+  /* align-content: center; */
+  /* margin: 0 0 0 125px; */
+}
+
+/* #winLossImg {
+} */
+
+#blueCheckerImg {
+  background-color: #669bbc;
+  height: 75px;
+  width: 75px;
+  border-radius: 50%;
+  border: solid 1px #cbd1dd;
+  /* align-content: center; */
+  /* margin: 0 0 0 900px; */
+}
+
+/* #winLossImg {
+} */
 
 #ctr {
-    display:flex;
-    justify-content: center;
-    padding: 50px
+  display: flex;
+  justify-content: center;
+  padding: 50px;
 }
 
 #restartButton {
-background-color: #04aa8e;
-border: none;
-color: white;
-padding: 16px 32px;
-font-size: 20px;
+  background-color: #0491aa;
+  border: none;
+  color: aliceblue;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-family: Montserrat, Helvetica, sans-serif;
+  transition: border 1800ms;
 }
-

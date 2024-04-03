@@ -106,7 +106,7 @@ Player vs Player
 - [ ] Draw - Set a draw message for a tie
 - [ ] (Optional) Add button to Restart Game
 - [ ] (Optional) 'Play Again' button should reset board and start game again
-- [ ] (Optional) Feature: Visual Indicator for when its player 1 or player 2's turn
+- [x] (Optional) Feature: Visual Indicator for when its player 1 or player 2's turn
 - [ ] (Optional) Create a Line through winning pieces or Highlight pieces with thick outline
 
 ### Things to refactor
