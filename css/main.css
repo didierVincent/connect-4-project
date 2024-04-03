@@ -4,22 +4,48 @@ body {
 }
 
 main {
-  font-size: 250%;
+  font-size: 200%;
   display: flex;
   justify-content: center;
-  margin: 15px;
+  margin: 10px 0px 0px 0px;
 }
+
 #board {
   background-color: #0f1a20;
   border: solid 1px #8c94a3;
   height: 615px;
   width: 700px;
-
   /* to partition all the divs wheres spaces can be played */
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
   border-radius: 1%;
+}
+
+em {
+  font-size: 50%;
+}
+
+scores {
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 150%;
+}
+
+scores:hover {
+  font-size: 250%;
+}
+
+score1 {
+  color: #d62839;
+  border: solid 1px #cbd1dd;
+  padding: 10px;
+}
+
+score2 {
+  color: #669bbc;
+  border: solid 1px #cbd1dd;
+  padding: 10px;
 }
 
 .space {
@@ -41,14 +67,7 @@ main {
   justify-content: space-evenly;
 }
 
-#features2 {
-  margin: 1px;
-  display: flex;
-  justify-content: space-around;
-  border: 1px solid black;
-}
-
-#ext1 {
+#redMove {
   /* background-color: #d62839; */
   border: solid 1px #cbd1dd;
   font-size: 100%;
@@ -61,31 +80,27 @@ main {
   transition: border 1000ms;
 }
 
-#ext1:hover,
-#ext2:hover,
-#ext3:hover,
+#redMove:hover,
+#gameMsg:hover,
+#blueMove:hover,
 #restartButton:hover {
   border: 1px solid black;
 }
 
-#ext2 {
+#gameMsg {
   border: solid 1px #cbd1dd;
   width: 350px;
-  height: 80px;
+  height: 90px;
   text-align: center;
   align-content: center;
   transition: border 1000ms;
 }
 
-#ext2:hover {
-  border: 1px solid black;
-}
-
-#ext3 {
+#blueMove {
   background-color: #f3fbfb;
   border: solid 1px #cbd1dd;
   width: 350px;
-  height: 20px;
+  height: 15px;
   text-align: center;
   align-content: center;
   padding: 20px;
@@ -93,36 +108,18 @@ main {
   transition: border 1000ms;
 }
 
-#redCheckerImg {
-  background-color: #d62839;
-  height: 75px;
-  width: 75px;
-  border-radius: 50%;
-  border: solid 1px #cbd1dd;
-  /* align-content: center; */
-  /* margin: 0 0 0 125px; */
-}
-
-/* #winLossImg {
-} */
-
 #blueCheckerImg {
   background-color: #669bbc;
   height: 75px;
   width: 75px;
   border-radius: 50%;
   border: solid 1px #cbd1dd;
-  /* align-content: center; */
-  /* margin: 0 0 0 900px; */
 }
-
-/* #winLossImg {
-} */
 
 #ctr {
   display: flex;
   justify-content: center;
-  padding: 50px;
+  padding: 20px;
 }
 
 #restartButton {

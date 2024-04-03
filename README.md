@@ -28,24 +28,24 @@ Player vs Player
 
 ## Roadmap
 
-- [ ] Basic Game (excluding diagonal wins, main menu page & how to play page)
-- [ ] Adding Diagonal Wins
+- [x] Basic Game (excluding diagonal wins, main menu page & how to play page)
+- [x] Adding Diagonal Wins
 - [ ] Adding Main Menu & How to play page
+- [x] Add score system to keep track of wins
 
 ## Stories (in order of priority)
 
-- As a user, I want a 7x6 board that can be played on.
-- As a user, I only want to make legal moves in order to play the game properly.
-- (Making sure every piece falls to the lowest available row of each column if there is space.)
-- As a user, I want the game to end when someone has won.
-- As a user, I want to visually know when it's my turn.
+- [x] As a user, I want a 7x6 board that can be played on.
+- [x] As a user, I only want to make legal moves in order to play the game properly.
+- [x] As a user, I want the game to end when someone has won.
+- [x] As a user, I want to visually know when it's my turn.
 
 ## Optional Stories (in order of priority)
 
-- As a user, I want to be able to restart after the game is over.
-- As a user, I want to be able to go back to the main menu if I want to quit or see instructions on how to play.
-- As a user, I want instructions on how to play before playing.
-- As a user, I want a victory message and crown when when I win! And a lose message as well.
+- [x] As a user, I want to be able to restart after the game is over.
+- [ ] As a user, I want to be able to go back to the main menu if I want to quit or see instructions on how to play.
+- [ ] As a user, I want instructions on how to play before playing.
+- [x] As a user, I want a victory message ~~and crown~~ when I win! And a lose message as well.
 
 # To Do
 
@@ -118,3 +118,5 @@ Player vs Player
 - [ ] (Optional) Create 'Main Menu' Page
 - [ ] (Optional) Create 'How To Play' Page
 - [ ] (Optional) Access to Main Menu while Game is running
+
+### Next Steps

@@ -9,8 +9,12 @@
     <script defer src="/didier-game/js/main.js"></script>
   </head>
   <body>
-    <main>Connect 4!</main>
-    <winmsg></winmsg>
+    <main><em>Connect</em> 4!</main>
+    <scores>
+      <score1><em>Player 1's Score:</em> 0</score1>
+      <score2><em>Player 2's Score:</em> 0</score2>
+    </scores>
+
     <br />
 
     <div id="board"></div>
@@ -20,37 +24,16 @@
       <div></div>
       <div></div>
       <div></div>
-      <div id="ext1">waiting for other player...</div>
+      <div id="redMove">waiting for other player...</div>
       <div></div>
-      <div id="ext2">Game Messages</div>
+      <div id="gameMsg">Game Messages</div>
       <div></div>
-      <div id="ext3">waiting for other player...</div>
+      <div id="blueMove">waiting for other player...</div>
       <div></div>
       <div></div>
       <div></div>
     </div>
 
-    <!-- <div id="features2">
-      <div></div>
-      <div id="redCheckerImg"></div>
-      <div id="winLossImg"></div>
-      <div></div>
-      <div id="blueCheckerImg"></div>
-      <div id="winLossImg"></div>
-      <div></div>
-    </div> -->
-
     <div id="ctr"><button id="restartButton">Reset!</button></div>
   </body>
 </html>
-
-<!-- 
-P1 Turn
-Game Messages
-P2 Turn
-
-
-Red Checker img
-P1 Win/Loss img
-Blue Checker img
-P2 Win/Loss -->
