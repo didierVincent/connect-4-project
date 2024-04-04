@@ -43,10 +43,6 @@ function init() {
   resetFeatures();
 }
 
-/*----- custom css -----*/
-p1Score.style.transition = "1.5s";
-p2Score.style.transition = "1.5s";
-
 /*-------- model: creating a nested board array to represent the game state using JS & assigning coordinates as id values --------*/
 function makeBoard() {
   for (let i = 0; i < rows; i++) {
@@ -64,11 +60,9 @@ function renderBoard() {
   for (let i = 0; i < rows; i++) {
     let row = [];
     for (let x = 0; x < columns; x++) {
-      //for view ---> create divs with coordinate ids, and a unique class to style later in css
       let space = document.createElement("div");
       space.id = x.toString() + "." + i.toString();
       space.classList.add("space");
-      //for view ---> adding divs to existing board div in html
       document.getElementById("board").appendChild(space);
     }
   }
@@ -81,26 +75,25 @@ function updatePlayableSpaces(event) {
     return;
   }
   const coords = event.target.id.split(".");
-  let cr = colData["column" + coords[0]];
+  let cD = colData["column" + coords[0]];
   let crV = colData["column" + coords[0]].r;
 
   if (crV < 0) {
-    console.log("row property unchanged: " + crV);
     return;
   } else if (playerTurn === playerRed) {
-    cr["r" + crV] = "red";
-    cr.p = "on";
+    cD["r" + crV] = "red";
+    cD.p = "on";
     colData["column" + coords[0]].r -= 1;
     checkWin();
   } else if (playerTurn === playerBlue) {
-    cr["r" + crV] = "blue";
-    cr.p = "on";
+    cD["r" + crV] = "blue";
+    cD.p = "on";
     colData["column" + coords[0]].r -= 1;
     checkWin();
   }
 }
 
-/*----------------------------------- view function: check board database for column data, then place piece -----------------------------------*/
+/*----------------------------------- view function: check board database for column data, then place piece & swap player -----------------------------------*/
 
 function setColour(event) {
   if (gameEnd) {
@@ -115,11 +108,9 @@ function setColour(event) {
   } else if (playerTurn === playerRed) {
     bottomSpace.style.backgroundColor = "#d62839"; // red
     playerTurn = playerBlue;
-    console.log(colData);
   } else if (playerTurn === playerBlue) {
     bottomSpace.style.backgroundColor = "#669bbc"; // blue
     playerTurn = playerRed;
-    console.log(colData);
   }
 }
 
@@ -128,23 +119,22 @@ function setColour(event) {
 function checkHorizontalWin() {
   for (let y = 1; y < 7; y++)
     for (let z = 0; z < columns - 3; z++) {
+      let firstPiece = columnRow[z]["r" + y];
       if (
         columnRow[z].p === "on" &&
         columnRow[z + 1].p === "on" &&
         columnRow[z + 2].p === "on" &&
         columnRow[z + 3].p === "on"
       ) {
-        console.log("horizontal checking colors");
         if (
-          columnRow[z]["r" + y] === columnRow[z + 1]["r" + y] &&
-          columnRow[z + 1]["r" + y] === columnRow[z + 2]["r" + y] &&
-          columnRow[z + 2]["r" + y] === columnRow[z + 3]["r" + y] &&
-          columnRow[z]["r" + y] != undefined
+          firstPiece === columnRow[z + 1]["r" + y] &&
+          firstPiece === columnRow[z + 2]["r" + y] &&
+          firstPiece === columnRow[z + 3]["r" + y] &&
+          firstPiece != undefined
         ) {
           setTimeout(showWinner, 1);
           addScore();
-          setTimeout(endGame, 2);
-          console.log("HORIZONTAL WINNNN");
+          setTimeout(endGame, 1);
           return;
         }
       }
@@ -154,20 +144,17 @@ function checkHorizontalWin() {
 function checkVerticalWin() {
   for (let y = 1; y < 7; y++)
     for (let z = 0; z < columns; z++) {
-      if (columnRow[z].p === "on") {
-        console.log("vert checking colors");
-        if (
-          columnRow[z]["r" + y] === columnRow[z]["r" + (y + 1)] &&
-          columnRow[z]["r" + y] === columnRow[z]["r" + (y + 2)] &&
-          columnRow[z]["r" + y] === columnRow[z]["r" + (y + 3)] &&
-          columnRow[z]["r" + y] != undefined
-        ) {
-          setTimeout(showWinner, 1);
-          addScore();
-          setTimeout(endGame, 2);
-          console.log("VERTICAL WINNNN");
-          return;
-        }
+      let firstPiece = columnRow[z]["r" + y];
+      if (
+        firstPiece === columnRow[z]["r" + (y + 1)] &&
+        firstPiece === columnRow[z]["r" + (y + 2)] &&
+        firstPiece === columnRow[z]["r" + (y + 3)] &&
+        firstPiece != undefined
+      ) {
+        setTimeout(showWinner, 1);
+        addScore();
+        setTimeout(endGame, 1);
+        return;
       }
     }
 }
@@ -175,23 +162,22 @@ function checkVerticalWin() {
 function checkDiagWinOne() {
   for (let y = 1; y < 4; y++)
     for (let z = 0; z < columns - 3; z++) {
+      let firstPiece = columnRow[z]["r" + y];
       if (
         columnRow[z].p === "on" &&
         columnRow[z + 1].p === "on" &&
         columnRow[z + 2].p === "on" &&
         columnRow[z + 3].p === "on"
       ) {
-        console.log("diag 1 checking colors");
         if (
-          columnRow[z]["r" + y] === columnRow[z + 1]["r" + (y + 1)] &&
-          columnRow[z]["r" + y] === columnRow[z + 2]["r" + (y + 2)] &&
-          columnRow[z]["r" + y] === columnRow[z + 3]["r" + (y + 3)] &&
-          columnRow[z]["r" + y] != undefined
+          firstPiece === columnRow[z + 1]["r" + (y + 1)] &&
+          firstPiece === columnRow[z + 2]["r" + (y + 2)] &&
+          firstPiece === columnRow[z + 3]["r" + (y + 3)] &&
+          firstPiece != undefined
         ) {
           setTimeout(showWinner, 1);
           addScore();
-          setTimeout(endGame, 2);
-          console.log("diag 1 WINNNN");
+          setTimeout(endGame, 1);
           return;
         }
       }
@@ -201,23 +187,22 @@ function checkDiagWinOne() {
 function checkDiagWinTwo() {
   for (let y = 3; y < 7; y++)
     for (let z = 0; z < columns - 3; z++) {
+      let firstPiece = columnRow[z]["r" + y];
       if (
         columnRow[z].p === "on" &&
         columnRow[z + 1].p === "on" &&
         columnRow[z + 2].p === "on" &&
         columnRow[z + 3].p === "on"
       ) {
-        console.log("diag 2 checking colors");
         if (
-          columnRow[z]["r" + y] === columnRow[z + 1]["r" + (y - 1)] &&
-          columnRow[z]["r" + y] === columnRow[z + 2]["r" + (y - 2)] &&
-          columnRow[z]["r" + y] === columnRow[z + 3]["r" + (y - 3)] &&
-          columnRow[z]["r" + y] != undefined
+          firstPiece === columnRow[z + 1]["r" + (y - 1)] &&
+          firstPiece === columnRow[z + 2]["r" + (y - 2)] &&
+          firstPiece === columnRow[z + 3]["r" + (y - 3)] &&
+          firstPiece != undefined
         ) {
           setTimeout(showWinner, 1);
           addScore();
-          setTimeout(endGame, 2);
-          console.log("diag 2 WINNNN");
+          setTimeout(endGame, 1);
           return;
         }
       }
@@ -239,24 +224,22 @@ function showPlayerTurn() {
   }
   if (playerTurn === playerRed) {
     //reset blue
-    blueMoveBox.style.backgroundColor = "#f3fbfb"; //grey
+    blueMoveBox.style.backgroundColor = "#f3fbfb"; //clear white
     blueMoveBox.style.fontSize = "100%";
     blueMoveBox.innerHTML = "waiting for other player...";
     //change red
     redMoveBox.style.backgroundColor = "#d62839"; //red
     redMoveBox.style.fontSize = "120%";
     redMoveBox.innerHTML = "Player 1 move!";
-    redMoveBox.style.borderStyle = "groove solid";
   } else {
     //reset red
-    redMoveBox.style.backgroundColor = "#f3fbfb"; //grey
+    redMoveBox.style.backgroundColor = "#f3fbfb"; //clear white
     redMoveBox.style.fontSize = "100%";
     redMoveBox.innerHTML = "waiting for other player...";
     // change blue
     blueMoveBox.style.backgroundColor = "#669bbc"; //blue
     blueMoveBox.style.fontSize = "120%";
     blueMoveBox.innerHTML = "Player 2 move!";
-    blueMoveBox.style.borderStyle = "groove solid";
   }
 }
 
@@ -320,7 +303,6 @@ function gameOverDraw() {
     colData.column6.r1
   ) {
     endGame();
-    console.log("GAME OVER");
     gameMsg.innerHTML = "Game Over!";
     gameMsg.style.fontSize = "100%";
     gameMsg.style.background = "black";
@@ -372,6 +354,8 @@ function resetFeatures() {
   blueMoveBox.style.fontSize = "100%";
   gameMsg.style.fontSize = "100%";
   gameMsg.style.color = "black";
+  p1Score.style.transition = "1.5s";
+  p2Score.style.transition = "1.5s";
   p1Score.style.backgroundColor = "white";
   p1Score.style.color = "#d62839";
   p2Score.style.backgroundColor = "white";
@@ -391,43 +375,36 @@ function resetData() {
     column0: {
       c: 0,
       r: 6,
-      p: null,
     },
 
     column1: {
       c: 1,
       r: 6,
-      p: null,
     },
 
     column2: {
       c: 2,
       r: 6,
-      p: null,
     },
 
     column3: {
       c: 3,
       r: 6,
-      p: null,
     },
 
     column4: {
       c: 4,
       r: 6,
-      p: null,
     },
 
     column5: {
       c: 5,
       r: 6,
-      p: null,
     },
 
     column6: {
       c: 6,
       r: 6,
-      p: null,
     },
   };
   columnRow = Object.values(colData);

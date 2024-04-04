@@ -4,18 +4,19 @@ body {
 }
 
 main {
-  font-size: 200%;
+  font-size: 250%;
   display: flex;
   justify-content: center;
-  margin: 10px 0px 0px 0px;
+  margin: 20px 0px 0px 0px;
 }
 
 #board {
   background-color: #0f1a20;
-  border: solid 1px #8c94a3;
+  border-color: #12191d;
+  border-width: 2px;
+  border-style: outset solid solid solid;
   height: 615px;
   width: 700px;
-  /* to partition all the divs wheres spaces can be played */
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
@@ -29,22 +30,23 @@ em {
 scores {
   display: flex;
   justify-content: space-evenly;
-  font-size: 150%;
-}
-
-scores:hover {
-  font-size: 250%;
+  font-size: 140%;
 }
 
 score1 {
   color: #d62839;
-  border: solid 1px #cbd1dd;
-  padding: 10px;
 }
 
 score2 {
   color: #669bbc;
-  border: solid 1px #cbd1dd;
+}
+
+score1,
+score2 {
+  display: flex;
+  width: 150px;
+  gap: 40px;
+  border: outset 1px #cbd1dd;
   padding: 10px;
 }
 
@@ -68,7 +70,6 @@ score2 {
 }
 
 #redMove {
-  /* background-color: #d62839; */
   border: solid 1px #cbd1dd;
   font-size: 100%;
   width: 350px;
@@ -83,7 +84,9 @@ score2 {
 #redMove:hover,
 #gameMsg:hover,
 #blueMove:hover,
-#restartButton:hover {
+#restartButton:hover,
+score1:hover,
+score2:hover {
   border: 1px solid black;
 }
 
