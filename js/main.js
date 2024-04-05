@@ -15,8 +15,8 @@ let columnRow;
 
 /*----- cached elements  -----*/
 
-const p1Score = document.querySelector("score1");
-const p2Score = document.querySelector("score2");
+const p1Score = document.querySelector("red-score");
+const p2Score = document.querySelector("blue-score");
 const gameMsg = document.getElementById("gameMsg");
 const redMoveBox = document.getElementById("redMove");
 const blueMoveBox = document.getElementById("blueMove");
@@ -28,9 +28,9 @@ const descInfo = document.getElementById("description");
 document.getElementById("board").addEventListener("click", showMove);
 document.getElementById("board").addEventListener("click", updateData);
 document.getElementById("board").addEventListener("click", showTurn);
-document.getElementById("restartButton").addEventListener("click", resetBoard);
 document.getElementById("board").addEventListener("click", endGameDraw);
-document.getElementById("board").addEventListener("click", hideInfoBoxes);
+document.getElementById("board").addEventListener("click", hideInfo);
+document.getElementById("restartButton").addEventListener("click", resetBoard);
 
 /*----- functions & default settings -----*/
 
@@ -74,10 +74,10 @@ function showMove(event) {
     return;
   } else if (playerTurn === playerRed) {
     bottomSpace.style.backgroundColor = "#d62839"; // red
-    resetMsgBoxOnly();
+    resetMsgOnly();
   } else if (playerTurn === playerBlue) {
     bottomSpace.style.backgroundColor = "#669bbc"; // blue
-    resetMsgBoxOnly();
+    resetMsgOnly();
   }
 }
 
@@ -274,13 +274,13 @@ function warnInvalidMove() {
 
 function endGameDraw() {
   if (
-    colData.column0.r1 &&
-    colData.column1.r1 &&
-    colData.column2.r1 &&
-    colData.column3.r1 &&
-    colData.column4.r1 &&
-    colData.column5.r1 &&
-    colData.column6.r1
+    colData.column0.r0 &&
+    colData.column1.r0 &&
+    colData.column2.r0 &&
+    colData.column3.r0 &&
+    colData.column4.r0 &&
+    colData.column5.r0 &&
+    colData.column6.r0
   ) {
     endGame();
     gameMsg.innerHTML = "Game Over!";
@@ -299,23 +299,23 @@ function endGameDraw() {
 
 function updateScore() {
   if (playerTurn === playerRed) {
-    let updatingScoreRed = p1Score.innerHTML;
-    let scoreNumRed = parseInt(updatingScoreRed.slice(-1));
+    let scoreTextRed = p1Score.innerHTML;
+    let scoreNumRed = parseInt(scoreTextRed.slice(-1));
     let newScoreNumRed = scoreNumRed + 1;
-    p1Score.innerHTML = updatingScoreRed.slice(0, -1) + newScoreNumRed;
+    p1Score.innerHTML = scoreTextRed.slice(0, -1) + newScoreNumRed;
     p1Score.style.backgroundColor = "#d62839";
     p1Score.style.color = "black";
   } else {
-    let updatingScoreBlue = p2Score.innerHTML;
-    let scoreNumBlue = parseInt(updatingScoreBlue.slice(-1));
+    let scoreTextBlue = p2Score.innerHTML;
+    let scoreNumBlue = parseInt(scoreTextBlue.slice(-1));
     let newScoreNumBlue = scoreNumBlue + 1;
-    p2Score.innerHTML = updatingScoreBlue.slice(0, -1) + newScoreNumBlue;
+    p2Score.innerHTML = scoreTextBlue.slice(0, -1) + newScoreNumBlue;
     p2Score.style.backgroundColor = "#669bbc";
     p2Score.style.color = "black";
   }
 }
 
-function hideInfoBoxes() {
+function hideInfo() {
   descInfo.style.backgroundColor = "white";
   gameInfo.style.color = "white";
   descInfo.style.color = "white";
@@ -362,7 +362,7 @@ function resetFeatures() {
   descInfo.style.backgroundColor = "#f3fbfb";
 }
 
-function resetMsgBoxOnly() {
+function resetMsgOnly() {
   gameMsg.innerHTML = "Game Messages";
   gameMsg.style.fontSize = "16px";
   gameMsg.style.color = "black";

@@ -9,7 +9,7 @@ main {
   justify-content: center;
   margin: 20px 0px 0px 0px;
 }
-#parent {
+#grid-ctr {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(5, 125px);
@@ -70,27 +70,27 @@ em {
   font-size: 50%;
 }
 
-style1 {
+text {
   font-style: italic;
   font-size: 0.75em;
 }
 
-scores {
+score-ctr {
   display: flex;
   justify-content: space-evenly;
   font-size: 140%;
 }
 
-score1 {
+red-score {
   color: #d62839;
 }
 
-score2 {
+blue-score {
   color: #669bbc;
 }
 
-score1,
-score2 {
+red-score,
+blue-score {
   display: flex;
   width: 150px;
   gap: 40px;
@@ -98,44 +98,13 @@ score2 {
   padding: 10px;
 }
 
-#features1 {
+#features-ctr {
   margin: 1px;
   display: flex;
   justify-content: space-evenly;
 }
 
-#redMove {
-  border: solid 1px #cbd1dd;
-  font-size: 100%;
-  width: 350px;
-  height: 20px;
-  text-align: center;
-  align-content: center;
-  padding: 20px;
-  transition: background-color 500ms;
-  transition: border 1000ms;
-}
-
-#gameinfo:hover,
-#description:hover,
-#redMove:hover,
-#gameMsg:hover,
-#blueMove:hover,
-#restartButton:hover,
-score1:hover,
-score2:hover {
-  border: 1px solid black;
-}
-
-#gameMsg {
-  border: solid 1px #cbd1dd;
-  width: 350px;
-  height: 90px;
-  text-align: center;
-  align-content: center;
-  transition: border 1000ms;
-}
-
+#redMove,
 #blueMove {
   background-color: #f3fbfb;
   border: solid 1px #cbd1dd;
@@ -148,15 +117,27 @@ score2:hover {
   transition: border 1000ms;
 }
 
-#blueCheckerImg {
-  background-color: #669bbc;
-  height: 75px;
-  width: 75px;
-  border-radius: 50%;
+#gameMsg {
   border: solid 1px #cbd1dd;
+  width: 350px;
+  height: 90px;
+  text-align: center;
+  align-content: center;
+  transition: border 1000ms;
 }
 
-#ctr {
+#gameinfo:hover,
+#description:hover,
+#redMove:hover,
+#gameMsg:hover,
+#blueMove:hover,
+#restartButton:hover,
+red-score:hover,
+blue-score:hover {
+  border: 1px solid black;
+}
+
+#button-ctr {
   display: flex;
   justify-content: center;
   padding: 20px;
