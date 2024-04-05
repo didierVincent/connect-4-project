@@ -9,6 +9,17 @@ main {
   justify-content: center;
   margin: 20px 0px 0px 0px;
 }
+#parent {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 125px);
+  grid-template-areas:
+    ". . bd . ."
+    ". gi bd ds ."
+    ". gi bd ds ."
+    ". . bd . ."
+    ". . bd . .";
+}
 
 #board {
   background-color: #0f1a20;
@@ -19,12 +30,49 @@ main {
   width: 700px;
   display: flex;
   flex-wrap: wrap;
-  margin: 0 auto;
+  margin: 0 50px 0 50px;
   border-radius: 1%;
+  grid-area: bd;
+}
+
+.space {
+  height: 90px;
+  width: 90px;
+  background-color: aliceblue;
+  margin: 5px;
+  border-radius: 70%;
+  transition: background-color 200ms;
+}
+
+.space:hover {
+  background-color: #353439;
+}
+
+#gameinfo {
+  grid-area: gi;
+}
+
+#description {
+  background-color: #f3fbfb;
+  grid-area: ds;
+}
+
+#gameinfo,
+#description {
+  display: flex;
+  flex-wrap: wrap;
+  border: solid 1px #cbd1dd;
+  padding: 1em;
+  transition: border 1000ms;
 }
 
 em {
   font-size: 50%;
+}
+
+style1 {
+  font-style: italic;
+  font-size: 0.75em;
 }
 
 scores {
@@ -50,19 +98,6 @@ score2 {
   padding: 10px;
 }
 
-.space {
-  height: 90px;
-  width: 90px;
-  background-color: aliceblue;
-  margin: 5px;
-  border-radius: 70%;
-  transition: background-color 200ms;
-}
-
-.space:hover {
-  background-color: #353439;
-}
-
 #features1 {
   margin: 1px;
   display: flex;
@@ -81,6 +116,8 @@ score2 {
   transition: border 1000ms;
 }
 
+#gameinfo:hover,
+#description:hover,
 #redMove:hover,
 #gameMsg:hover,
 #blueMove:hover,

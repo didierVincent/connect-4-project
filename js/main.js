@@ -1,101 +1,66 @@
 /*----- constants-----*/
 
 /*----------------------------------- default settings -----------------------------------*/
+
 const playerRed = "Red";
 const playerBlue = "Blue";
 let playerTurn = playerRed;
 
 /*----- state variables -----*/
-let board;
+
 let rows;
 let columns;
 let gameEnd;
 let columnRow;
 
 /*----- cached elements  -----*/
+
 const p1Score = document.querySelector("score1");
 const p2Score = document.querySelector("score2");
 const gameMsg = document.getElementById("gameMsg");
 const redMoveBox = document.getElementById("redMove");
 const blueMoveBox = document.getElementById("blueMove");
+const gameInfo = document.getElementById("gameinfo");
+const descInfo = document.getElementById("description");
 
 /*----- event listeners -----*/
-document
-  .getElementById("board")
-  .addEventListener("click", updatePlayableSpaces);
-document.getElementById("board").addEventListener("click", setColour);
-document.getElementById("board").addEventListener("click", warnInvalidMove);
-document.getElementById("board").addEventListener("click", showPlayerTurn);
-document.getElementById("restartButton").addEventListener("click", resetBoard);
-document.getElementById("board").addEventListener("click", gameOverDraw);
 
-/*----- functions -----*/
+document.getElementById("board").addEventListener("click", showMove);
+document.getElementById("board").addEventListener("click", updateData);
+document.getElementById("board").addEventListener("click", showTurn);
+document.getElementById("restartButton").addEventListener("click", resetBoard);
+document.getElementById("board").addEventListener("click", endGameDraw);
+document.getElementById("board").addEventListener("click", hideInfoBoxes);
+
+/*----- functions & default settings -----*/
+
 init();
 
 function init() {
-  board = [];
   rows = 6;
   columns = 7;
   gameEnd = false;
-  makeBoard();
   renderBoard();
   resetData();
   resetFeatures();
 }
 
-/*-------- model: creating a nested board array to represent the game state using JS & assigning coordinates as id values --------*/
-function makeBoard() {
-  for (let i = 0; i < rows; i++) {
-    let row = [];
-    for (let x = 0; x < columns; x++) {
-      row.push(x.toString() + "," + i.toString());
-    }
-    board.push(row);
-  }
-}
-
-/*------------------------- view: creating board for HTML using JS & assigning coordinates as id values -------------------------*/
+/*------------------------- view function: creating board for HTML using JS & assigning coordinates as id values -------------------------*/
 
 function renderBoard() {
-  for (let i = 0; i < rows; i++) {
-    let row = [];
-    for (let x = 0; x < columns; x++) {
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < columns; c++) {
       let space = document.createElement("div");
-      space.id = x.toString() + "." + i.toString();
+      space.id = c.toString() + "." + r.toString();
       space.classList.add("space");
       document.getElementById("board").appendChild(space);
     }
   }
 }
 
-/*----------------------------------- model function: update board object database 'colData' after placing a piece -----------------------------------*/
+/*----------------------------------- view function: check board database for column data, then place piece if legal & reset game message -----------------------------------*/
 
-function updatePlayableSpaces(event) {
-  if (gameEnd) {
-    return;
-  }
-  const coords = event.target.id.split(".");
-  let cD = colData["column" + coords[0]];
-  let crV = colData["column" + coords[0]].r;
-
-  if (crV < 0) {
-    return;
-  } else if (playerTurn === playerRed) {
-    cD["r" + crV] = "red";
-    cD.p = "on";
-    colData["column" + coords[0]].r -= 1;
-    checkWin();
-  } else if (playerTurn === playerBlue) {
-    cD["r" + crV] = "blue";
-    cD.p = "on";
-    colData["column" + coords[0]].r -= 1;
-    checkWin();
-  }
-}
-
-/*----------------------------------- view function: check board database for column data, then place piece & swap player -----------------------------------*/
-
-function setColour(event) {
+function showMove(event) {
   if (gameEnd) {
     return;
   }
@@ -103,13 +68,41 @@ function setColour(event) {
   const bottomSpace = document.getElementById(
     coords[0] + "." + colData["column" + coords[0]].r
   );
-  if (colData["column" + coords[0]].r < 0) {
+  let crV = colData["column" + coords[0]].r;
+  if (crV < 0) {
+    warnInvalidMove();
     return;
   } else if (playerTurn === playerRed) {
     bottomSpace.style.backgroundColor = "#d62839"; // red
-    playerTurn = playerBlue;
+    resetMsgBoxOnly();
   } else if (playerTurn === playerBlue) {
     bottomSpace.style.backgroundColor = "#669bbc"; // blue
+    resetMsgBoxOnly();
+  }
+}
+
+/*----------------------------------- model function: update board object database 'colData' after placing a piece -----------------------------------*/
+
+function updateData(event) {
+  if (gameEnd) {
+    return;
+  }
+  const coords = event.target.id.split(".");
+  let cD = colData["column" + coords[0]];
+  let crV = colData["column" + coords[0]].r;
+  if (crV < 0) {
+    return;
+  } else if (playerTurn === playerRed) {
+    cD.p = "on";
+    cD["r" + crV] = "red";
+    colData["column" + coords[0]].r -= 1;
+    checkWin();
+    playerTurn = playerBlue;
+  } else if (playerTurn === playerBlue) {
+    cD.p = "on";
+    colData["column" + coords[0]].r -= 1;
+    cD["r" + crV] = "blue";
+    checkWin();
     playerTurn = playerRed;
   }
 }
@@ -117,7 +110,7 @@ function setColour(event) {
 /*----------------------------------- model functions: game logic, checking for wins -----------------------------------*/
 
 function checkHorizontalWin() {
-  for (let y = 1; y < 7; y++)
+  for (let y = 0; y < rows; y++)
     for (let z = 0; z < columns - 3; z++) {
       let firstPiece = columnRow[z]["r" + y];
       if (
@@ -132,9 +125,9 @@ function checkHorizontalWin() {
           firstPiece === columnRow[z + 3]["r" + y] &&
           firstPiece != undefined
         ) {
-          setTimeout(showWinner, 1);
-          addScore();
-          setTimeout(endGame, 1);
+          showWin();
+          updateScore();
+          endGame();
           return;
         }
       }
@@ -142,7 +135,7 @@ function checkHorizontalWin() {
 }
 
 function checkVerticalWin() {
-  for (let y = 1; y < 7; y++)
+  for (let y = 0; y < rows; y++)
     for (let z = 0; z < columns; z++) {
       let firstPiece = columnRow[z]["r" + y];
       if (
@@ -151,16 +144,16 @@ function checkVerticalWin() {
         firstPiece === columnRow[z]["r" + (y + 3)] &&
         firstPiece != undefined
       ) {
-        setTimeout(showWinner, 1);
-        addScore();
-        setTimeout(endGame, 1);
+        showWin();
+        updateScore();
+        endGame();
         return;
       }
     }
 }
 
-function checkDiagWinOne() {
-  for (let y = 1; y < 4; y++)
+function checkDiagWinNWSE() {
+  for (let y = 0; y < rows - 3; y++)
     for (let z = 0; z < columns - 3; z++) {
       let firstPiece = columnRow[z]["r" + y];
       if (
@@ -175,17 +168,17 @@ function checkDiagWinOne() {
           firstPiece === columnRow[z + 3]["r" + (y + 3)] &&
           firstPiece != undefined
         ) {
-          setTimeout(showWinner, 1);
-          addScore();
-          setTimeout(endGame, 1);
+          showWin();
+          updateScore();
+          endGame();
           return;
         }
       }
     }
 }
 
-function checkDiagWinTwo() {
-  for (let y = 3; y < 7; y++)
+function checkDiagWinSWNE() {
+  for (let y = 3; y < rows; y++)
     for (let z = 0; z < columns - 3; z++) {
       let firstPiece = columnRow[z]["r" + y];
       if (
@@ -200,9 +193,9 @@ function checkDiagWinTwo() {
           firstPiece === columnRow[z + 3]["r" + (y - 3)] &&
           firstPiece != undefined
         ) {
-          setTimeout(showWinner, 1);
-          addScore();
-          setTimeout(endGame, 1);
+          showWin();
+          updateScore();
+          endGame();
           return;
         }
       }
@@ -212,13 +205,13 @@ function checkDiagWinTwo() {
 function checkWin() {
   checkHorizontalWin();
   checkVerticalWin();
-  checkDiagWinOne();
-  checkDiagWinTwo();
+  checkDiagWinNWSE();
+  checkDiagWinSWNE();
 }
 
-/*----------------------------------- view functions (features): 'your move!' boxes, game messages box, score boxes -----------------------------------*/
+/*----------------------------------- view functions (features): 'your move!' boxes, game messages, info boxes, score boxes -----------------------------------*/
 
-function showPlayerTurn() {
+function showTurn() {
   if (gameEnd) {
     return;
   }
@@ -243,11 +236,11 @@ function showPlayerTurn() {
   }
 }
 
-function showWinner() {
+function showWin() {
   redMoveBox.style.transition = "2s";
   blueMoveBox.style.transition = "2s";
   gameMsg.style.transition = "2s";
-  if (playerTurn === playerBlue) {
+  if (playerTurn === playerRed) {
     gameMsg.innerHTML = "Player 1 Wins!!!";
     gameMsg.style.fontSize = "32px";
     gameMsg.style.color = "#001427";
@@ -272,27 +265,14 @@ function showWinner() {
   }
 }
 
-function warnInvalidMove(event) {
-  if (gameEnd) {
-    return;
-  }
-  const coords = event.target.id.split(".");
-  gameMsg.style.transition = "500ms";
-  if (colData["column" + coords[0]].r < 0) {
-    gameMsg.innerHTML = "Invalid Move!";
-    gameMsg.style.fontSize = "32px";
-    gameMsg.style.color = "#d62839";
-    gameMsg.style.backgroundColor = "#0f1a20";
-    return;
-  } else {
-    gameMsg.innerHTML = "Game Messages";
-    gameMsg.style.fontSize = "16px";
-    gameMsg.style.color = "black";
-    gameMsg.style.backgroundColor = "white";
-  }
+function warnInvalidMove() {
+  gameMsg.innerHTML = "Invalid Move!";
+  gameMsg.style.fontSize = "32px";
+  gameMsg.style.color = "#d62839";
+  gameMsg.style.backgroundColor = "#0f1a20";
 }
 
-function gameOverDraw() {
+function endGameDraw() {
   if (
     colData.column0.r1 &&
     colData.column1.r1 &&
@@ -317,7 +297,7 @@ function gameOverDraw() {
   }
 }
 
-function addScore() {
+function updateScore() {
   if (playerTurn === playerRed) {
     let updatingScoreRed = p1Score.innerHTML;
     let scoreNumRed = parseInt(updatingScoreRed.slice(-1));
@@ -335,15 +315,32 @@ function addScore() {
   }
 }
 
-/*----------------------------------- game end, reset functions & other init functions -----------------------------------*/
-function endGame() {
-  gameEnd = true;
+function hideInfoBoxes() {
+  descInfo.style.backgroundColor = "white";
+  gameInfo.style.color = "white";
+  descInfo.style.color = "white";
+  gameInfo.style.border = "none";
+  descInfo.style.border = "none";
+}
+
+/*----------------------------------- reset functions & other init functions -----------------------------------*/
+
+function resetBoard() {
+  gameEnd = false;
+  playerTurn = playerRed;
+  setTimeout(resetFeatures, 300);
+  resetData();
+  resetColors();
 }
 
 function resetFeatures() {
   redMoveBox.style.transition = "500ms";
   blueMoveBox.style.transition = "500ms";
+  gameInfo.style.transition = "1s";
+  descInfo.style.transition = "1s";
   gameMsg.style.transition = "500ms";
+  p1Score.style.transition = "1.5s";
+  p2Score.style.transition = "1.5s";
   redMoveBox.innerHTML = "Player 1 move!";
   blueMoveBox.innerHTML = "waiting for other player...";
   gameMsg.innerHTML = "Game Messages";
@@ -354,57 +351,59 @@ function resetFeatures() {
   blueMoveBox.style.fontSize = "100%";
   gameMsg.style.fontSize = "100%";
   gameMsg.style.color = "black";
-  p1Score.style.transition = "1.5s";
-  p2Score.style.transition = "1.5s";
   p1Score.style.backgroundColor = "white";
   p1Score.style.color = "#d62839";
   p2Score.style.backgroundColor = "white";
   p2Score.style.color = "#669bbc";
+  gameInfo.style.color = "black";
+  descInfo.style.color = "black";
+  gameInfo.style.border = "1px solid #cbd1dd";
+  descInfo.style.border = "1px solid #cbd1dd";
+  descInfo.style.backgroundColor = "#f3fbfb";
 }
 
-function resetBoard() {
-  gameEnd = false;
-  playerTurn = playerRed;
-  setTimeout(resetFeatures, 300);
-  resetData();
-  resetColors();
+function resetMsgBoxOnly() {
+  gameMsg.innerHTML = "Game Messages";
+  gameMsg.style.fontSize = "16px";
+  gameMsg.style.color = "black";
+  gameMsg.style.backgroundColor = "white";
 }
 
 function resetData() {
   colData = {
     column0: {
       c: 0,
-      r: 6,
+      r: 5,
     },
 
     column1: {
       c: 1,
-      r: 6,
+      r: 5,
     },
 
     column2: {
       c: 2,
-      r: 6,
+      r: 5,
     },
 
     column3: {
       c: 3,
-      r: 6,
+      r: 5,
     },
 
     column4: {
       c: 4,
-      r: 6,
+      r: 5,
     },
 
     column5: {
       c: 5,
-      r: 6,
+      r: 5,
     },
 
     column6: {
       c: 6,
-      r: 6,
+      r: 5,
     },
   };
   columnRow = Object.values(colData);
@@ -415,4 +414,10 @@ function resetColors() {
   for (let i = 0; i < spaces.length; i++) {
     spaces[i].style.background = "aliceblue";
   }
+}
+
+/*----------------------------------- end game function -----------------------------------*/
+
+function endGame() {
+  gameEnd = true;
 }
