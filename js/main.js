@@ -17,20 +17,24 @@ let columnRow;
 
 const p1Score = document.querySelector("red-score");
 const p2Score = document.querySelector("blue-score");
-const gameMsg = document.getElementById("gameMsg");
-const redMoveBox = document.getElementById("redMove");
-const blueMoveBox = document.getElementById("blueMove");
-const gameInfo = document.getElementById("gameinfo");
+const gameMsg = document.getElementById("game-msg");
+const redMoveBox = document.getElementById("red-move");
+const blueMoveBox = document.getElementById("blue-move");
+const gameInfo = document.getElementById("game-info");
 const descInfo = document.getElementById("description");
 
 /*----- event listeners -----*/
 
-document.getElementById("board").addEventListener("click", showMove);
-document.getElementById("board").addEventListener("click", updateData);
-document.getElementById("board").addEventListener("click", showTurn);
-document.getElementById("board").addEventListener("click", endGameDraw);
-document.getElementById("board").addEventListener("click", hideInfo);
-document.getElementById("restartButton").addEventListener("click", resetBoard);
+document.getElementById("board").addEventListener("click", clickHandler);
+document.getElementById("restart-button").addEventListener("click", resetBoard);
+
+function clickHandler(evt) {
+  showMove(evt);
+  updateData(evt);
+  showTurn(evt);
+  endGameDraw(evt);
+  hideInfo(evt);
+}
 
 /*----- functions & default settings -----*/
 
@@ -93,13 +97,11 @@ function updateData(event) {
   if (crV < 0) {
     return;
   } else if (playerTurn === playerRed) {
-    cD.p = "on";
     cD["r" + crV] = "red";
     colData["column" + coords[0]].r -= 1;
     checkWin();
     playerTurn = playerBlue;
   } else if (playerTurn === playerBlue) {
-    cD.p = "on";
     colData["column" + coords[0]].r -= 1;
     cD["r" + crV] = "blue";
     checkWin();
@@ -114,22 +116,13 @@ function checkHorizontalWin() {
     for (let z = 0; z < columns - 3; z++) {
       let firstPiece = columnRow[z]["r" + y];
       if (
-        columnRow[z].p === "on" &&
-        columnRow[z + 1].p === "on" &&
-        columnRow[z + 2].p === "on" &&
-        columnRow[z + 3].p === "on"
+        firstPiece === columnRow[z + 1]["r" + y] &&
+        firstPiece === columnRow[z + 2]["r" + y] &&
+        firstPiece === columnRow[z + 3]["r" + y] &&
+        firstPiece != undefined
       ) {
-        if (
-          firstPiece === columnRow[z + 1]["r" + y] &&
-          firstPiece === columnRow[z + 2]["r" + y] &&
-          firstPiece === columnRow[z + 3]["r" + y] &&
-          firstPiece != undefined
-        ) {
-          showWin();
-          updateScore();
-          endGame();
-          return;
-        }
+        endGame();
+        return;
       }
     }
 }
@@ -144,8 +137,6 @@ function checkVerticalWin() {
         firstPiece === columnRow[z]["r" + (y + 3)] &&
         firstPiece != undefined
       ) {
-        showWin();
-        updateScore();
         endGame();
         return;
       }
@@ -157,22 +148,13 @@ function checkDiagWinNWSE() {
     for (let z = 0; z < columns - 3; z++) {
       let firstPiece = columnRow[z]["r" + y];
       if (
-        columnRow[z].p === "on" &&
-        columnRow[z + 1].p === "on" &&
-        columnRow[z + 2].p === "on" &&
-        columnRow[z + 3].p === "on"
+        firstPiece === columnRow[z + 1]["r" + (y + 1)] &&
+        firstPiece === columnRow[z + 2]["r" + (y + 2)] &&
+        firstPiece === columnRow[z + 3]["r" + (y + 3)] &&
+        firstPiece != undefined
       ) {
-        if (
-          firstPiece === columnRow[z + 1]["r" + (y + 1)] &&
-          firstPiece === columnRow[z + 2]["r" + (y + 2)] &&
-          firstPiece === columnRow[z + 3]["r" + (y + 3)] &&
-          firstPiece != undefined
-        ) {
-          showWin();
-          updateScore();
-          endGame();
-          return;
-        }
+        endGame();
+        return;
       }
     }
 }
@@ -182,22 +164,13 @@ function checkDiagWinSWNE() {
     for (let z = 0; z < columns - 3; z++) {
       let firstPiece = columnRow[z]["r" + y];
       if (
-        columnRow[z].p === "on" &&
-        columnRow[z + 1].p === "on" &&
-        columnRow[z + 2].p === "on" &&
-        columnRow[z + 3].p === "on"
+        firstPiece === columnRow[z + 1]["r" + (y - 1)] &&
+        firstPiece === columnRow[z + 2]["r" + (y - 2)] &&
+        firstPiece === columnRow[z + 3]["r" + (y - 3)] &&
+        firstPiece != undefined
       ) {
-        if (
-          firstPiece === columnRow[z + 1]["r" + (y - 1)] &&
-          firstPiece === columnRow[z + 2]["r" + (y - 2)] &&
-          firstPiece === columnRow[z + 3]["r" + (y - 3)] &&
-          firstPiece != undefined
-        ) {
-          showWin();
-          updateScore();
-          endGame();
-          return;
-        }
+        endGame();
+        return;
       }
     }
 }
@@ -282,7 +255,7 @@ function endGameDraw() {
     colData.column5.r0 &&
     colData.column6.r0
   ) {
-    endGame();
+    gameEnd = true;
     gameMsg.innerHTML = "Game Over!";
     gameMsg.style.fontSize = "100%";
     gameMsg.style.background = "black";
@@ -420,4 +393,6 @@ function resetColors() {
 
 function endGame() {
   gameEnd = true;
+  showWin();
+  updateScore();
 }

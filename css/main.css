@@ -48,7 +48,7 @@ main {
   background-color: #353439;
 }
 
-#gameinfo {
+#game-info {
   grid-area: gi;
 }
 
@@ -57,7 +57,7 @@ main {
   grid-area: ds;
 }
 
-#gameinfo,
+#game-info,
 #description {
   display: flex;
   flex-wrap: wrap;
@@ -104,8 +104,8 @@ blue-score {
   justify-content: space-evenly;
 }
 
-#redMove,
-#blueMove {
+#red-move,
+#blue-move {
   background-color: #f3fbfb;
   border: solid 1px #cbd1dd;
   width: 350px;
@@ -117,7 +117,7 @@ blue-score {
   transition: border 1000ms;
 }
 
-#gameMsg {
+#game-msg {
   border: solid 1px #cbd1dd;
   width: 350px;
   height: 90px;
@@ -126,12 +126,12 @@ blue-score {
   transition: border 1000ms;
 }
 
-#gameinfo:hover,
+#game-info:hover,
 #description:hover,
-#redMove:hover,
-#gameMsg:hover,
-#blueMove:hover,
-#restartButton:hover,
+#red-move:hover,
+#game-msg:hover,
+#blue-move:hover,
+#restart-button:hover,
 red-score:hover,
 blue-score:hover {
   border: 1px solid black;
@@ -143,7 +143,7 @@ blue-score:hover {
   padding: 20px;
 }
 
-#restartButton {
+#restart-button {
   background-color: #0491aa;
   border: none;
   color: aliceblue;
