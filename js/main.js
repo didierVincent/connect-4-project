@@ -45,65 +45,81 @@ function init() {
   columns = 7;
   gameEnd = false;
   renderBoard();
-  resetData();
+  initData();
   resetFeatures();
 }
 
-/*------------------------- view function: creating board for HTML using JS & assigning coordinates as id values -------------------------*/
+function initData() {
+  //game state data: r = default row position (lowest playable space for each column)
+  gameData = {
+    column0: { r: 5 },
+    column1: { r: 5 },
+    column2: { r: 5 },
+    column3: { r: 5 },
+    column4: { r: 5 },
+    column5: { r: 5 },
+    column6: { r: 5 },
+  };
+  columnRow = Object.values(gameData);
+}
+
+/*-------------- view function: creating spaces for game as child divs inside the main board div in HTML & assigning each space coordinates as id values --------------*/
 
 function renderBoard() {
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < columns; c++) {
       let space = document.createElement("div");
-      space.id = c.toString() + "." + r.toString();
+      //give each space div a unique ID (coordinates)
+      space.id = c.toString() + "." + r.toString(); //event handlers will use this ID to determine which column has been clicked/locate what space needs colour
       space.classList.add("space");
       document.getElementById("board").appendChild(space);
     }
   }
 }
 
-/*----------------------------------- view function: check board database for column data, then place piece if legal & reset game message -----------------------------------*/
+/*----------------------------------- view function: show move in clicked column & reset game message box (or show warning for invalid move) -----------------------------------*/
 
 function showMove(event) {
   if (gameEnd) {
     return;
   }
-  const coords = event.target.id.split(".");
-  const bottomSpace = document.getElementById(
-    coords[0] + "." + colData["column" + coords[0]].r
-  );
-  let crV = colData["column" + coords[0]].r;
-  if (crV < 0) {
-    warnInvalidMove();
+  //next 3 lines: color the correct space in the clicked column (using set ID coordinates & game data)
+  const colNum = event.target.id.at(0); //clicked column number
+  const rowNum = columnRow[colNum].r;
+  const playSpace = document.getElementById(colNum + "." + rowNum);
+
+  if (rowNum < 0) {
+    warnInvalidMove(); //show warning in game message box
     return;
   } else if (playerTurn === playerRed) {
-    bottomSpace.style.backgroundColor = "#d62839"; // red
+    playSpace.style.backgroundColor = "#d62839"; // red
     resetMsgOnly();
   } else if (playerTurn === playerBlue) {
-    bottomSpace.style.backgroundColor = "#669bbc"; // blue
+    playSpace.style.backgroundColor = "#669bbc"; // blue
     resetMsgOnly();
   }
 }
 
-/*----------------------------------- model function: update board object database 'colData' after placing a piece -----------------------------------*/
+/*----------------------------------- model function: update board object database 'gameData' after placing a piece -----------------------------------*/
 
 function updateData(event) {
   if (gameEnd) {
     return;
   }
-  const coords = event.target.id.split(".");
-  let cD = colData["column" + coords[0]];
-  let crV = colData["column" + coords[0]].r;
-  if (crV < 0) {
+  //next 3 lines: find the playable space in column clicked
+  const colNum = event.target.id.at(0); //clicked column number
+  const cData = columnRow[colNum]; //column data
+  const rowNum = cData.r;
+  if (rowNum < 0) {
     return;
   } else if (playerTurn === playerRed) {
-    cD["r" + crV] = "red";
-    colData["column" + coords[0]].r -= 1;
+    cData["r" + rowNum] = "red"; // create new property in gameData (representing spaces in grid) that are being used in game logic to check for wins
+    cData.r -= 1;
     checkWin();
     playerTurn = playerBlue;
   } else if (playerTurn === playerBlue) {
-    colData["column" + coords[0]].r -= 1;
-    cD["r" + crV] = "blue";
+    cData["r" + rowNum] = "blue";
+    cData.r -= 1;
     checkWin();
     playerTurn = playerRed;
   }
@@ -116,10 +132,10 @@ function checkHorizontalWin() {
     for (let z = 0; z < columns - 3; z++) {
       let firstPiece = columnRow[z]["r" + y];
       if (
+        firstPiece != undefined &&
         firstPiece === columnRow[z + 1]["r" + y] &&
         firstPiece === columnRow[z + 2]["r" + y] &&
-        firstPiece === columnRow[z + 3]["r" + y] &&
-        firstPiece != undefined
+        firstPiece === columnRow[z + 3]["r" + y]
       ) {
         endGame();
         return;
@@ -132,10 +148,10 @@ function checkVerticalWin() {
     for (let z = 0; z < columns; z++) {
       let firstPiece = columnRow[z]["r" + y];
       if (
+        firstPiece != undefined &&
         firstPiece === columnRow[z]["r" + (y + 1)] &&
         firstPiece === columnRow[z]["r" + (y + 2)] &&
-        firstPiece === columnRow[z]["r" + (y + 3)] &&
-        firstPiece != undefined
+        firstPiece === columnRow[z]["r" + (y + 3)]
       ) {
         endGame();
         return;
@@ -148,10 +164,10 @@ function checkDiagWinNWSE() {
     for (let z = 0; z < columns - 3; z++) {
       let firstPiece = columnRow[z]["r" + y];
       if (
+        firstPiece != undefined &&
         firstPiece === columnRow[z + 1]["r" + (y + 1)] &&
         firstPiece === columnRow[z + 2]["r" + (y + 2)] &&
-        firstPiece === columnRow[z + 3]["r" + (y + 3)] &&
-        firstPiece != undefined
+        firstPiece === columnRow[z + 3]["r" + (y + 3)]
       ) {
         endGame();
         return;
@@ -164,10 +180,10 @@ function checkDiagWinSWNE() {
     for (let z = 0; z < columns - 3; z++) {
       let firstPiece = columnRow[z]["r" + y];
       if (
+        firstPiece != undefined &&
         firstPiece === columnRow[z + 1]["r" + (y - 1)] &&
         firstPiece === columnRow[z + 2]["r" + (y - 2)] &&
-        firstPiece === columnRow[z + 3]["r" + (y - 3)] &&
-        firstPiece != undefined
+        firstPiece === columnRow[z + 3]["r" + (y - 3)]
       ) {
         endGame();
         return;
@@ -247,13 +263,13 @@ function warnInvalidMove() {
 
 function endGameDraw() {
   if (
-    colData.column0.r0 &&
-    colData.column1.r0 &&
-    colData.column2.r0 &&
-    colData.column3.r0 &&
-    colData.column4.r0 &&
-    colData.column5.r0 &&
-    colData.column6.r0
+    gameData.column0.r0 &&
+    gameData.column1.r0 &&
+    gameData.column2.r0 &&
+    gameData.column3.r0 &&
+    gameData.column4.r0 &&
+    gameData.column5.r0 &&
+    gameData.column6.r0
   ) {
     gameEnd = true;
     gameMsg.innerHTML = "Game Over!";
@@ -302,7 +318,7 @@ function resetBoard() {
   gameEnd = false;
   playerTurn = playerRed;
   setTimeout(resetFeatures, 300);
-  resetData();
+  initData();
   resetColors();
 }
 
@@ -340,46 +356,6 @@ function resetMsgOnly() {
   gameMsg.style.fontSize = "16px";
   gameMsg.style.color = "black";
   gameMsg.style.backgroundColor = "white";
-}
-
-function resetData() {
-  colData = {
-    column0: {
-      c: 0,
-      r: 5,
-    },
-
-    column1: {
-      c: 1,
-      r: 5,
-    },
-
-    column2: {
-      c: 2,
-      r: 5,
-    },
-
-    column3: {
-      c: 3,
-      r: 5,
-    },
-
-    column4: {
-      c: 4,
-      r: 5,
-    },
-
-    column5: {
-      c: 5,
-      r: 5,
-    },
-
-    column6: {
-      c: 6,
-      r: 5,
-    },
-  };
-  columnRow = Object.values(colData);
 }
 
 function resetColors() {
