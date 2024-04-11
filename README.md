@@ -2,6 +2,12 @@
 
 **Unit 1 Game Project**
 
+## Getting Started!
+
+**Here's a link to play the game:** https://didiervincent.github.io/connect-4-project/
+
+Go head-to-head with another player and race to stack 4 in a row!
+
 ## Description & Game Rules
 
 - Local 2 player game (PvP)
@@ -54,12 +60,6 @@
 
 HTML, CSS & JavaScript, created in Visual Studio Code
 
-## Getting Started
-
-**Here's a link to play the game:** https://didiervincent.github.io/connect-4-project/
-
-Go head-to-head with another player and race to stack 4 in a row!
-
 ## Next Steps
 
 - Compatibility: The game is currently only displays properly on a standard computer monitor or laptop screen - the game does not properly scale down to view and play on smaller screens. Will need some reworking in HTML & CSS, (maybe also in JavaScript).
@@ -70,7 +70,7 @@ Go head-to-head with another player and race to stack 4 in a row!
 
 - (Details) Highlight Winning Pieces: When a player wins, the game ends but it doesn't explicitly display where the 4 winning pieces are, (new players may get confused and have to check around). When someone wins, to increase engagement and avoid any confusion, we could highlight the 4 winning pieces when someone wins. This could be done by highlighting the winning pieces by creating a line through them, animating the colors/borders slightly, etc.
 
-## Wireframe
+## Initial Wireframe
 
 **Overview: Navigating from Main Menu -> How to Play -> Game**
 
@@ -182,8 +182,13 @@ Go head-to-head with another player and race to stack 4 in a row!
 - [x] Try renaming varables more appropriately & concisely
 - [x] Row values are inconsistent and overly complicated: colData.r values should be set from 0-5 instead of 1-6
 - [x] (adjust all functions that are affected by the above change)
-- [ ] Rework data model: Might be overly complicated by checking and using both column.r properties and column.r(x) properties? Consider removing column.r and use only column.r(x) for functions instead. (for column.r(x), could set x = default value instead of using column.r as a default value?) not sure.
-- [ ] Check if event handlers could be refactored better. (Maybe put all click handlers into 1 function?)
+- [x] ~~Rework data model: Might be overly complicated by checking and using both column.r properties and column.r(x) properties? Consider removing column.r and use only column.r(x) for functions instead. (for column.r(x), could set x = default value instead of using column.r as a default value?)~~
+- [x] (The column.r(x) values are necessary)
+- [x] Check if event handlers could be refactored better. (Maybe put all click handlers into 1 function?)
+- [x] Add back some comments to add clarity to key lines of code
+- [x] Simplify gameData, 'c' properties aren't necessary
+- [x] Rename functions/variables more appropriately for future readability
+- [x] Use columnRow[] instead of colData["column" + clickedColumnNum]
 
 ### Things to debug
 
