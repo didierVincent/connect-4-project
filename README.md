@@ -99,6 +99,12 @@ HTML, CSS & JavaScript, created in Visual Studio Code
 - [x] Adding Main Menu & How to play page (added description/info boxes before game starts)
 - [x] Add score system to keep track of wins
 
+## Next Steps
+
+- [ ] Implement Responsive CSS to different device sizes (media query for phone/tablet/laptop etc)
+- [ ] New Game Mode: Party Mode
+- [ ] Online Play
+
 ## Stories (in order of priority)
 
 - [x] As a user, I want a 7x6 board that can be played on.
