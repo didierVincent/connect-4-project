@@ -44,7 +44,7 @@ function init() {
   rows = 6;
   columns = 7;
   gameEnd = false;
-  renderBoard();
+  // renderBoard();
   initData();
   resetFeatures();
 }

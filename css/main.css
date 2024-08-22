@@ -9,35 +9,29 @@ main {
   justify-content: center;
   margin: 20px 0px 0px 0px;
 }
+
 #grid-ctr {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(5, 125px);
-  grid-template-areas:
-    ". . bd . ."
-    ". gi bd ds ."
-    ". gi bd ds ."
-    ". . bd . ."
-    ". . bd . .";
 }
 
 #board {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  height: fit-content;
+  width: fit-content;
   background-color: #0f1a20;
   border-color: #12191d;
-  border-width: 2px;
   border-style: outset solid solid solid;
-  height: 615px;
-  width: 700px;
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0 50px 0 50px;
+  border-width: 2px;
+  /* margin: 0 50px 0 50px; */
   border-radius: 1%;
-  grid-area: bd;
 }
 
 .space {
-  height: 90px;
-  width: 90px;
+  height: 7vw;
+  width: 7vw;
+  text-align: center;
+  color: purple;
   background-color: aliceblue;
   margin: 5px;
   border-radius: 70%;
