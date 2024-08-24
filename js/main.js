@@ -256,7 +256,7 @@ function showWin() {
 
 function warnInvalidMove() {
   gameMsg.innerHTML = "Invalid Move!";
-  gameMsg.style.fontSize = "32px";
+  // gameMsg.style.fontSize = "32px";
   gameMsg.style.color = "#d62839";
   gameMsg.style.backgroundColor = "#0f1a20";
 }
@@ -273,16 +273,16 @@ function endGameDraw() {
   ) {
     gameEnd = true;
     gameMsg.innerHTML = "Game Over!";
-    gameMsg.style.fontSize = "100%";
+    gameMsg.style.fontSize = "16px";
     gameMsg.style.background = "black";
     redMoveBox.style.background = "white";
     blueMoveBox.style.background = "white";
     redMoveBox.innerHTML = "Draw!";
     blueMoveBox.innerHTML = "Draw!";
-    gameMsg.style.fontSize = "36px";
+    // gameMsg.style.fontSize = "36px";
     gameMsg.style.color = "white";
-    redMoveBox.style.fontSize = "28px";
-    blueMoveBox.style.fontSize = "28px";
+    // redMoveBox.style.fontSize = "28px";
+    // blueMoveBox.style.fontSize = "28px";
   }
 }
 
@@ -339,7 +339,7 @@ function resetFeatures() {
   // redMoveBox.style.fontSize = "120%";
   // redMoveBox.style.fontSize = "100%";
   // blueMoveBox.style.fontSize = "100%";
-  gameMsg.style.fontSize = "100%";
+  gameMsg.style.fontSize = "16px";
   gameMsg.style.color = "black";
   p1Score.style.backgroundColor = "white";
   p1Score.style.color = "#d62839";

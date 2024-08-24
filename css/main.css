@@ -8,7 +8,7 @@ body {
   align-items: center;
   justify-items: center;
   /* mobile first - single column */
-  grid-template-rows: 13vh 10vh 1fr 12vh 10vh 8vh;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-areas:
     "logo"
     "score"
@@ -20,9 +20,9 @@ body {
 
 main {
   display: flex;
-  font-size: clamp(50px, 10vw, 60px);
+  font-size: clamp(30px, 5vw, 35px);
   justify-content: center;
-  margin: 20px auto;
+  margin-top: 10px;
   grid-area: logo;
 }
 
@@ -37,7 +37,8 @@ score-ctr {
 
   gap: 3vw;
   height: 50%;
-  font-size: clamp(15px, 3vw, 25px);
+  font-size: clamp(15px, 3vw, 20px);
+  padding: clamp(5px, 3vh, 8px);
   grid-area: score;
 }
 
@@ -56,13 +57,13 @@ blue-score {
   align-items: center;
   min-width: 150px;
   gap: 1vw;
-  padding: clamp(5px, 3vw, 15px);
+  padding: clamp(5px, 3vh, 12px);
   border: outset 1px #cbd1dd;
 }
 
 #board {
   max-width: 90vw;
-  max-height: 70vh;
+  max-height: 65vh;
   /* Limit the height to 80% of the viewport height */
   display: grid;
   align-items: center;
@@ -85,7 +86,7 @@ blue-score {
 
 .space {
   width: calc(
-    min(90vw / 7, 70vh / 6) - calc(min(1.5vw, 1.5vh) * 6 / 7)
+    min(90vw / 7, 65vh / 6) - calc(min(1.5vw, 1.5vh) * 6 / 7)
   ); /* Adjust based on width, height, and gap */
   height: calc(min(90vw / 7, 60vh / 6) - calc(min(1.5vw, 1.5vh) * 6 / 7));
   text-align: center;
@@ -124,12 +125,10 @@ text {
 }
 
 #player-moves-ctr {
-  /* margin: 1px; */
   display: flex;
   justify-content: center;
   align-items: center;
-  /* height: clamp(40px, 1vw, 100px); */
-  gap: 16px;
+  gap: 2vw;
   grid-area: player-moves;
 }
 
@@ -139,8 +138,9 @@ text {
   border: solid 1px #cbd1dd;
   text-align: center;
   align-content: center;
-  font-size: clamp(16px, 3vw, 24px);
-  padding: 3%;
+  font-size: clamp(16px, 2vw, 20px);
+  padding: clamp(3px, 2vh, 15px);
+  margin-top: clamp(5px, 3vh, 12px);
   transition: background-color 500ms;
   transition: border 1000ms;
 }
@@ -150,8 +150,9 @@ text {
   align-content: center;
   justify-content: center;
   font-size: clamp(10px, 3vw, 15px);
-  width: 50vw;
-  padding: 16px;
+  width: clamp(100px, 50vw, 500px);
+  padding: clamp(3px, 2vh, 15px);
+  margin-top: clamp(5px, 3vh, 12px);
   border: solid 1px #cbd1dd;
   transition: border 1000ms;
   grid-area: game-msg;
@@ -172,12 +173,14 @@ blue-score:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: clamp(3px, 2vh, 15px);
+  margin-top: clamp(3px, 3vh, 5px);
   grid-area: restart-button;
 }
 
 #restart-button {
   font-size: clamp(10px, 3vw, 15px);
-  padding: 2vh 5vw;
+  padding: clamp(3px, 2vh, 15px);
   font-family: Montserrat, Helvetica, sans-serif;
   transition: border 1800ms;
   background-color: #0491aa;
