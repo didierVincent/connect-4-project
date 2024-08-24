@@ -3,55 +3,45 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Connect 4 - Project Game</title>
+    <title>Connect 4!</title>
     <link rel="stylesheet" href="css/main.css" />
     <script defer src="js/main.js"></script>
   </head>
   <body>
-    <main><em>Connect</em> 4!</main>
+    <main id="logo"><em>Connect</em> 4!</main>
     <score-ctr>
-      <red-score><em>Player 1's Score:</em> 0</red-score>
+      <red-score><em2>Player 1's Score:</em2> 0</red-score>
 
-      <blue-score><em>Player 2's Score:</em> 0</blue-score>
+      <blue-score><em2>Player 2's Score:</em2> 0</blue-score>
     </score-ctr>
 
     <br />
-    <div id="grid-ctr">
-      <div id="game-info">
-        Connect 4!
-        <text
-          >Go head-to-head with a friend in a battle to own the grid!
-          <br /><br /><br /><br />
-          Classic board game invented in 1974. <br /><br /><br /><br />
-        </text>
-      </div>
-      <div id="board"></div>
-      <div id="description">
-        How to Play! <br />
-        <text>
-          Click on a space to drop your disc into the grid. <br /><br />Go
-          head-to-head with another player and race to stack 4 in a row!<br /><br />The
-          first player to stack 4 in a row horizontally, vertically or
-          diagonally, wins! <br /><br />
-        </text>
-      </div>
+
+    <div id="game-info">
+      Connect 4!
+      <text
+        >Go head-to-head with a friend in a battle to own the grid!
+        <br /><br /><br /><br />
+        Classic board game invented in 1974. <br /><br /><br /><br />
+      </text>
+    </div>
+    <div id="board"></div>
+    <div id="description">
+      How to Play! <br />
+      <text>
+        Click on a space to drop your disc into the grid. <br /><br />Go
+        head-to-head with another player and race to stack 4 in a row!<br /><br />The
+        first player to stack 4 in a row horizontally, vertically or diagonally,
+        wins! <br /><br />
+      </text>
     </div>
 
-    <br />
-
-    <div id="features-ctr">
-      <div></div>
-      <div></div>
-      <div></div>
+    <div id="player-moves-ctr">
       <div id="red-move">waiting for other player...</div>
-      <div></div>
-      <div id="game-msg">Game Messages</div>
-      <div></div>
       <div id="blue-move">waiting for other player...</div>
-      <div></div>
-      <div></div>
-      <div></div>
     </div>
+
+    <div id="game-msg">Game Messages</div>
 
     <div id="button-ctr"><button id="restart-button">Restart!</button></div>
   </body>
