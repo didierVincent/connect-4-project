@@ -56,6 +56,13 @@ Go head-to-head with another player and race to stack 4 in a row!
 (occurs when grid is completely full and neither player managed to win)
 ![Game Over - Draw](docs/screenshots/6-game-over-draw-screen.png)
 
+## Roadmap
+
+- [x] Basic Game (excluding diagonal wins, main menu page & how to play page)
+- [x] Adding Diagonal Wins
+- [x] Adding Main Menu & How to play page (added description/info boxes before game starts)
+- [x] Add score system to keep track of wins
+
 ## Technology Used
 
 HTML, CSS & JavaScript, created in Visual Studio Code
@@ -92,19 +99,6 @@ HTML, CSS & JavaScript, created in Visual Studio Code
 
 ![Example Win](docs/wireframe/wire-frame-4-example-win.png)
 
-## Roadmap
-
-- [x] Basic Game (excluding diagonal wins, main menu page & how to play page)
-- [x] Adding Diagonal Wins
-- [x] Adding Main Menu & How to play page (added description/info boxes before game starts)
-- [x] Add score system to keep track of wins
-
-## Next Steps
-
-- [ ] Implement Responsive CSS to different device sizes (media query for phone/tablet/laptop etc)
-- [ ] New Game Mode: Party Mode
-- [ ] Online Play
-
 ## Stories (in order of priority)
 
 - [x] As a user, I want a 7x6 board that can be played on.
@@ -119,7 +113,7 @@ HTML, CSS & JavaScript, created in Visual Studio Code
 - [x] As a user, I want a victory message ~~and crown~~ when I win! And a lose message as well.
 - [x] As a user, I want to be able to restart the game at any point if I want to quit or see the instructions on how to play again.
 
-# To Do
+## To Do
 
 ### Organise & Rethink
 
@@ -208,3 +202,26 @@ HTML, CSS & JavaScript, created in Visual Studio Code
 - [ ] ~~(Optional) Access to Main Menu while Game is running~~
 - [x] Added Game infomation & How To Play messages on game start
 - [x] Restart button lets you view the Game infomation & How To Play messages again
+
+<hr >
+
+### (23 Aug 2024), v.2
+
+# Refactoring App:
+
+(will add a trello link here)
+
+### Future Mode
+
+- New Game Mode: Party Mode
+- Online Play
+
+### Technical Additions
+
+#### Playable on Mobile/Tablet!
+
+- Implement Responsive CSS to different device sizes (media query for phone/tablet/laptop etc)
+
+#### Responsive layout for pc/laptop!
+
+- Change layout to original design
