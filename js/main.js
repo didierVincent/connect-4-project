@@ -44,7 +44,7 @@ function init() {
   rows = 6;
   columns = 7;
   gameEnd = false;
-  // renderBoard();
+  renderBoard();
   initData();
   resetFeatures();
 }
@@ -207,20 +207,20 @@ function showTurn() {
   if (playerTurn === playerRed) {
     //reset blue
     blueMoveBox.style.backgroundColor = "#f3fbfb"; //clear white
-    blueMoveBox.style.fontSize = "100%";
+    // blueMoveBox.style.fontSize = "100%";
     blueMoveBox.innerHTML = "waiting for other player...";
     //change red
     redMoveBox.style.backgroundColor = "#d62839"; //red
-    redMoveBox.style.fontSize = "120%";
+    // redMoveBox.style.fontSize = "120%";
     redMoveBox.innerHTML = "Player 1 move!";
   } else {
     //reset red
     redMoveBox.style.backgroundColor = "#f3fbfb"; //clear white
-    redMoveBox.style.fontSize = "100%";
+    // redMoveBox.style.fontSize = "100%";
     redMoveBox.innerHTML = "waiting for other player...";
     // change blue
     blueMoveBox.style.backgroundColor = "#669bbc"; //blue
-    blueMoveBox.style.fontSize = "120%";
+    // blueMoveBox.style.fontSize = "120%";
     blueMoveBox.innerHTML = "Player 2 move!";
   }
 }
@@ -231,25 +231,25 @@ function showWin() {
   gameMsg.style.transition = "2s";
   if (playerTurn === playerRed) {
     gameMsg.innerHTML = "Player 1 Wins!!!";
-    gameMsg.style.fontSize = "32px";
+    // gameMsg.style.fontSize = "32px";
     gameMsg.style.color = "#001427";
     gameMsg.style.backgroundColor = "#d62839";
     redMoveBox.style.backgroundColor = "#d62839";
     blueMoveBox.style.backgroundColor = "grey";
     redMoveBox.innerHTML = "You win!";
-    redMoveBox.style.fontSize = "200%";
-    blueMoveBox.style.fontSize = "90%";
+    // redMoveBox.style.fontSize = "200%";
+    // blueMoveBox.style.fontSize = "90%";
     blueMoveBox.innerHTML = "You lost!";
   } else {
     gameMsg.innerHTML = "Player 2 Wins!!!";
-    gameMsg.style.fontSize = "32px";
+    // gameMsg.style.fontSize = "32px";
     gameMsg.style.color = "#001427";
     gameMsg.style.backgroundColor = "#669bbc";
     blueMoveBox.style.backgroundColor = "#669bbc";
     redMoveBox.style.backgroundColor = "grey";
     blueMoveBox.innerHTML = "You win!";
-    blueMoveBox.style.fontSize = "200%";
-    redMoveBox.style.fontSize = "90%";
+    // blueMoveBox.style.fontSize = "200%";
+    // redMoveBox.style.fontSize = "90%";
     redMoveBox.innerHTML = "You lost!";
   }
 }
@@ -336,8 +336,9 @@ function resetFeatures() {
   blueMoveBox.style.backgroundColor = "#f3fbfb";
   gameMsg.style.backgroundColor = "#f3fbfb";
   redMoveBox.style.backgroundColor = "#d62839";
-  redMoveBox.style.fontSize = "120%";
-  blueMoveBox.style.fontSize = "100%";
+  // redMoveBox.style.fontSize = "120%";
+  // redMoveBox.style.fontSize = "100%";
+  // blueMoveBox.style.fontSize = "100%";
   gameMsg.style.fontSize = "100%";
   gameMsg.style.color = "black";
   p1Score.style.backgroundColor = "white";

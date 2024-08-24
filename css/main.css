@@ -1,40 +1,97 @@
 body {
+  height: 100vh;
+  box-sizing: border-box;
   margin: 0 auto;
   font-family: Montserrat, Helvetica, sans-serif;
+  font-size: calc(1.5vw + 1.5vh);
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  /* mobile first - single column */
+  grid-template-rows: 13vh 10vh 1fr 12vh 10vh 8vh;
+  grid-template-areas:
+    "logo"
+    "score"
+    "board"
+    "player-moves"
+    "game-msg"
+    "restart-button";
 }
 
 main {
-  font-size: 250%;
   display: flex;
+  font-size: clamp(50px, 10vw, 60px);
   justify-content: center;
-  margin: 20px 0px 0px 0px;
+  margin: 20px auto;
+  grid-area: logo;
 }
 
-#grid-ctr {
+em {
+  font-size: 50%;
+}
+
+score-ctr {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 3vw;
+  height: 50%;
+  font-size: clamp(15px, 3vw, 25px);
+  grid-area: score;
+}
+
+red-score {
+  color: #d62839;
+}
+
+blue-score {
+  color: #669bbc;
+}
+
+red-score,
+blue-score {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 150px;
+  gap: 1vw;
+  padding: clamp(5px, 3vw, 15px);
+  border: outset 1px #cbd1dd;
 }
 
 #board {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  height: fit-content;
-  width: fit-content;
+  max-width: 90vw;
+  max-height: 70vh;
+  /* Limit the height to 80% of the viewport height */
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  gap: calc(min(1.5vw, 1.5vh));
+  /* Adjusts gap based on the smaller dimension */
+  margin: 0 auto;
+  padding: calc(min(1.5vw, 1.5vh));
+  /* Padding around the board to maintain aspect ratio */
+
   background-color: #0f1a20;
   border-color: #12191d;
   border-style: outset solid solid solid;
   border-width: 2px;
   /* margin: 0 50px 0 50px; */
   border-radius: 1%;
+  grid-area: board;
 }
 
 .space {
-  height: 7vw;
-  width: 7vw;
+  width: calc(
+    min(90vw / 7, 70vh / 6) - calc(min(1.5vw, 1.5vh) * 6 / 7)
+  ); /* Adjust based on width, height, and gap */
+  height: calc(min(90vw / 7, 60vh / 6) - calc(min(1.5vw, 1.5vh) * 6 / 7));
   text-align: center;
   color: purple;
   background-color: aliceblue;
-  margin: 5px;
-  border-radius: 70%;
+  border-radius: 50%;
   transition: background-color 200ms;
 }
 
@@ -53,15 +110,12 @@ main {
 
 #game-info,
 #description {
-  display: flex;
+  /* display: flex; */
+  display: none;
   flex-wrap: wrap;
   border: solid 1px #cbd1dd;
   padding: 1em;
   transition: border 1000ms;
-}
-
-em {
-  font-size: 50%;
 }
 
 text {
@@ -69,55 +123,38 @@ text {
   font-size: 0.75em;
 }
 
-score-ctr {
+#player-moves-ctr {
+  /* margin: 1px; */
   display: flex;
-  justify-content: space-evenly;
-  font-size: 140%;
-}
-
-red-score {
-  color: #d62839;
-}
-
-blue-score {
-  color: #669bbc;
-}
-
-red-score,
-blue-score {
-  display: flex;
-  width: 150px;
-  gap: 40px;
-  border: outset 1px #cbd1dd;
-  padding: 10px;
-}
-
-#features-ctr {
-  margin: 1px;
-  display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
+  align-items: center;
+  /* height: clamp(40px, 1vw, 100px); */
+  gap: 16px;
+  grid-area: player-moves;
 }
 
 #red-move,
 #blue-move {
   background-color: #f3fbfb;
   border: solid 1px #cbd1dd;
-  width: 350px;
-  height: 15px;
   text-align: center;
   align-content: center;
-  padding: 20px;
+  font-size: clamp(16px, 3vw, 24px);
+  padding: 3%;
   transition: background-color 500ms;
   transition: border 1000ms;
 }
 
 #game-msg {
-  border: solid 1px #cbd1dd;
-  width: 350px;
-  height: 90px;
-  text-align: center;
+  display: flex;
   align-content: center;
+  justify-content: center;
+  font-size: clamp(10px, 3vw, 15px);
+  width: 50vw;
+  padding: 16px;
+  border: solid 1px #cbd1dd;
   transition: border 1000ms;
+  grid-area: game-msg;
 }
 
 #game-info:hover,
@@ -134,15 +171,16 @@ blue-score:hover {
 #button-ctr {
   display: flex;
   justify-content: center;
-  padding: 20px;
+  align-items: center;
+  grid-area: restart-button;
 }
 
 #restart-button {
+  font-size: clamp(10px, 3vw, 15px);
+  padding: 2vh 5vw;
+  font-family: Montserrat, Helvetica, sans-serif;
+  transition: border 1800ms;
   background-color: #0491aa;
   border: none;
   color: aliceblue;
-  padding: 12px 24px;
-  font-size: 16px;
-  font-family: Montserrat, Helvetica, sans-serif;
-  transition: border 1800ms;
 }
