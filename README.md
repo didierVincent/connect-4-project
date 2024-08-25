@@ -77,6 +77,10 @@ HTML, CSS & JavaScript, created in Visual Studio Code
 
 - (Details) Highlight Winning Pieces: When a player wins, the game ends but it doesn't explicitly display where the 4 winning pieces are, (new players may get confused and have to check around). When someone wins, to increase engagement and avoid any confusion, we could highlight the 4 winning pieces when someone wins. This could be done by highlighting the winning pieces by creating a line through them, animating the colors/borders slightly, etc.
 
+### (21 Apr 2024), v.1
+
+<hr >
+
 ## Initial Wireframe
 
 **Overview: Navigating from Main Menu -> How to Play -> Game**
