@@ -94,7 +94,6 @@ blue-score {
   ); /* Adjust based on width, height, and gap */
   height: calc(min(90vw / 7, 60vh / 6) - calc(min(1.5vw, 1.5vh) * 6 / 7));
   text-align: center;
-  color: purple;
   background-color: aliceblue;
   border-radius: 50%;
   transition: background-color 200ms;
@@ -115,7 +114,6 @@ blue-score {
 
 #game-info,
 #description {
-  /* display: flex; */
   display: none;
   flex-wrap: wrap;
   border: solid 1px #cbd1dd;
