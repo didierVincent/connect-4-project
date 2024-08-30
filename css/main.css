@@ -86,6 +86,7 @@ blue-score {
   /* margin: 0 50px 0 50px; */
   border-radius: 1%;
   grid-area: board;
+  /* box-sizing: border-box; */
 }
 
 .space {
@@ -97,6 +98,7 @@ blue-score {
   background-color: aliceblue;
   border-radius: 50%;
   transition: background-color 200ms;
+  /* box-sizing: border-box; */
 }
 
 .space:hover {
