@@ -3,11 +3,11 @@
 } */
 
 body {
-  height: 100vh;
+  height: 100dvh;
   box-sizing: border-box;
   margin: 0 auto;
   font-family: Montserrat, Helvetica, sans-serif;
-  font-size: calc(1.5vw + 1.5vh);
+  font-size: calc(1.5vw + 1.5dvh);
   display: grid;
   align-items: center;
   justify-items: center;
@@ -42,7 +42,7 @@ score-ctr {
   gap: 3vw;
   height: 50%;
   font-size: clamp(15px, 3vw, 20px);
-  padding: clamp(5px, 3vh, 8px);
+  padding: clamp(5px, 3dvh, 8px);
   grid-area: score;
 }
 
@@ -61,22 +61,22 @@ blue-score {
   align-items: center;
   min-width: 150px;
   gap: 1vw;
-  padding: clamp(5px, 3vh, 12px);
+  padding: clamp(5px, 3dvh, 12px);
   border: outset 1px #cbd1dd;
 }
 
 #board {
   max-width: 90vw;
-  max-height: 65vh;
+  max-height: 65dvh;
   /* Limit the height to 80% of the viewport height */
   display: grid;
   align-items: center;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(6, 1fr);
-  gap: calc(min(1.5vw, 1.5vh));
+  gap: calc(min(1.5vw, 1.5dvh));
   /* Adjusts gap based on the smaller dimension */
   margin: 0 auto;
-  padding: calc(min(1.5vw, 1.5vh));
+  padding: calc(min(1.5vw, 1.5dvh));
   /* Padding around the board to maintain aspect ratio */
 
   background-color: #0f1a20;
@@ -91,9 +91,9 @@ blue-score {
 
 .space {
   width: calc(
-    min(90vw / 7, 65vh / 6) - calc(min(1.5vw, 1.5vh) * 6 / 7)
+    min(90vw / 7, 65dvh / 6) - calc(min(1.5vw, 1.5dvh) * 6 / 7)
   ); /* Adjust based on width, height, and gap */
-  height: calc(min(90vw / 7, 60vh / 6) - calc(min(1.5vw, 1.5vh) * 6 / 7));
+  height: calc(min(90vw / 7, 60dvh / 6) - calc(min(1.5vw, 1.5dvh) * 6 / 7));
   text-align: center;
   background-color: aliceblue;
   border-radius: 50%;
@@ -143,8 +143,8 @@ text {
   text-align: center;
   align-content: center;
   font-size: clamp(16px, 2vw, 20px);
-  padding: clamp(3px, 2vh, 15px);
-  margin-top: clamp(5px, 3vh, 12px);
+  padding: clamp(3px, 2dvh, 15px);
+  margin-top: clamp(5px, 3dvh, 12px);
   transition: background-color 500ms;
   transition: border 1000ms;
 }
@@ -155,8 +155,8 @@ text {
   justify-content: center;
   font-size: clamp(10px, 3vw, 15px);
   width: clamp(100px, 50vw, 500px);
-  padding: clamp(3px, 2vh, 15px);
-  margin-top: clamp(5px, 3vh, 12px);
+  padding: clamp(3px, 2dvh, 15px);
+  margin-top: clamp(5px, 3dvh, 12px);
   border: solid 1px #cbd1dd;
   transition: border 1000ms;
   grid-area: game-msg;
@@ -177,14 +177,14 @@ blue-score:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: clamp(3px, 2vh, 15px);
-  margin-top: clamp(3px, 3vh, 5px);
+  padding: clamp(3px, 2dvh, 15px);
+  margin-top: clamp(3px, 3dvh, 5px);
   grid-area: restart-button;
 }
 
 #restart-button {
   font-size: clamp(10px, 3vw, 15px);
-  padding: clamp(3px, 2vh, 15px);
+  padding: clamp(3px, 2dvh, 15px);
   font-family: Montserrat, Helvetica, sans-serif;
   transition: border 1800ms;
   background-color: #0491aa;
